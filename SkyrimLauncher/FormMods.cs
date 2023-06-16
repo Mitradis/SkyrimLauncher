@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -6,6 +8,7 @@ namespace SkyrimLauncher
 {
     public partial class FormMods : Form
     {
+        List<string> installedMods = new List<string>();
         string textDeleteMod = "Удалить мод?";
         string textNoFileSelect = "Не выбран файл.";
         string textNoUninstalFile = "Нет .txt файла инструкции.";
@@ -21,6 +24,11 @@ namespace SkyrimLauncher
             if (FormMain.langTranslate == "EN")
             {
                 langTranslateEN();
+            }
+            string joinline = FuncParser.stringRead(FormMain.pathLauncherINI, "Mods", "installedMods");
+            if (!String.IsNullOrEmpty(joinline))
+            {
+                installedMods.AddRange(joinline.Split(new string[] { "|" }, StringSplitOptions.None));
             }
             refreshFileList();
         }
@@ -48,7 +56,12 @@ namespace SkyrimLauncher
                 {
                     if (FormMain.archiveExt.Exists(s => s.Equals(Path.GetExtension(line), StringComparison.OrdinalIgnoreCase)))
                     {
-                        listBox1.Items.Add(Path.GetFileName(line));
+                        string file = Path.GetFileName(line);
+                        listView1.Items.Add(file);
+                        if (installedMods.Exists(s => s.Equals(file, StringComparison.OrdinalIgnoreCase)))
+                        {
+                            listView1.Items[listView1.Items.Count - 1].BackColor = Color.PaleGreen;
+                        }
                     }
                 }
             }
@@ -56,14 +69,14 @@ namespace SkyrimLauncher
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
         private void button_Install_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex != -1)
+            if (listView1.SelectedItems.Count > 0)
             {
                 FuncMisc.toggleButtons(this, false);
-                listBox1.Enabled = false;
-                FuncFiles.unpackArhive(FormMain.pathModsFolder + listBox1.SelectedItem.ToString(), false, true);
+                listView1.Enabled = false;
+                FuncFiles.unpackArhive(FormMain.pathModsFolder + listView1.SelectedItems[0].Text, false, true);
                 FuncMisc.toggleButtons(this, true);
-                listBox1.Enabled = true;
-                string file = FormMain.pathModsFolder + Path.GetFileNameWithoutExtension(FormMain.pathModsFolder + listBox1.SelectedItem.ToString()) + ".txt";
+                listView1.Enabled = true;
+                string file = FormMain.pathModsFolder + Path.GetFileNameWithoutExtension(FormMain.pathModsFolder + listView1.SelectedItems[0].Text) + ".txt";
                 if (File.Exists(file))
                 {
                     if (FuncParser.keyExists(file, "INSTALL", "ADDARCHIVES"))
@@ -89,6 +102,9 @@ namespace SkyrimLauncher
                         }
                     }
                 }
+                listView1.SelectedItems[0].BackColor = Color.PaleGreen;
+                installedMods.Add(listView1.SelectedItems[0].Text);
+                FuncParser.iniWrite(FormMain.pathLauncherINI, "Mods", "installedMods", String.Join("|", installedMods));
             }
             else
             {
@@ -98,11 +114,11 @@ namespace SkyrimLauncher
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
         private void button_Uninstall_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex != -1)
+            if (listView1.SelectedItems.Count > 0)
             {
                 if (FuncMisc.dialogResult(textDeleteMod, FormMain.textConfirmTitle))
                 {
-                    string file = FormMain.pathModsFolder + Path.GetFileNameWithoutExtension(FormMain.pathModsFolder + listBox1.SelectedItem.ToString()) + ".txt";
+                    string file = FormMain.pathModsFolder + Path.GetFileNameWithoutExtension(FormMain.pathModsFolder + listView1.SelectedItems[0].Text) + ".txt";
                     if (File.Exists(file))
                     {
                         foreach (string line in File.ReadLines(file))
@@ -128,6 +144,9 @@ namespace SkyrimLauncher
                         {
                             FuncFiles.unpackArhive(FormMain.pathGameFolder + FuncParser.stringRead(file, "UNINSTALL", "UNPACK"), true, true);
                         }
+                        listView1.SelectedItems[0].BackColor = SystemColors.Window;
+                        installedMods.Remove(listView1.SelectedItems[0].Text);
+                        FuncParser.iniWrite(FormMain.pathLauncherINI, "Mods", "installedMods", String.Join("|", installedMods));
                     }
                     else
                     {

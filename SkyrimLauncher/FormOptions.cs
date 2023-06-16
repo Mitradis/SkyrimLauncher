@@ -69,6 +69,7 @@ namespace SkyrimLauncher
             refreshScreenResolution();
             refreshSettings();
             refreshModsList();
+            listView1.Visible = true;
             timer2.Enabled = true;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //

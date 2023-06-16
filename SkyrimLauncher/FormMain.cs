@@ -26,7 +26,7 @@ namespace SkyrimLauncher
         public static string pathSkyrimPrefsINI = pathMyDoc + "SkyrimPrefs.ini";
         public static string pathAppData = FuncFiles.pathAddSlash(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Skyrim"));
         public static string panelFileVersion = FileVersionInfo.GetVersionInfo(pathLauncherExecuting).ProductVersion;
-        public static string pathLauncherINI = pathSkyrimFolder + "Launcher.ini";
+        public static string pathLauncherINI = pathSkyrimFolder + "SkyrimLauncher.ini";
         public static string pathENBLocalINI = pathGameFolder + "enblocal.ini";
         public static string pathENBSeriesINI = pathGameFolder + "enbseries.ini";
         public static string argsStartsWith = null;
@@ -331,6 +331,9 @@ namespace SkyrimLauncher
                 "; files extension index: .rar, .7z, .zip, .zipx",
                 "UpdatesExtension=1",
                 "UpdateHost=http://www.www.www/",
+                "",
+                "Mods",
+                "installedMods=",
                 "",
                 "[Clearing]",
                 "IgnoreList=",
