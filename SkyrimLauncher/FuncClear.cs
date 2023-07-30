@@ -180,6 +180,7 @@ namespace SkyrimLauncher
                 "data|skse|plugins|cobbbugfixes.ini",
                 "data|skse|plugins|cpconvert.dll",
                 "data|skse|plugins|cpconvert.ini",
+                "data|skse|plugins|crash_log.dll",
                 "data|skse|plugins|crashfixplugin.dll",
                 "data|skse|plugins|crashfixplugin.ini",
                 "data|skse|plugins|enchantreloadfix.dll",
