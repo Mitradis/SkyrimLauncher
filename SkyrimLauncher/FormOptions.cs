@@ -274,15 +274,20 @@ namespace SkyrimLauncher
             int lastIndex = -1;
             bool goodSort = false;
             bool hasMasters = false;
+            bool indexError = false;
             foreach (string line in masterFiles[item.Index])
             {
                 hasMasters = true;
                 ListViewItem findItem = listView1.FindItemWithText(line);
-                if (findItem != null && findItem.Index > lastIndex && item.Index > findItem.Index)
+                if (findItem != null && item.Index > findItem.Index)
                 {
                     if (!findItem.Checked && check)
                     {
                         checkItem(findItem, true);
+                    }
+                    if (findItem.Index < lastIndex)
+                    {
+                        indexError = true;
                     }
                     lastIndex = findItem.Index;
                     goodSort = true;
@@ -298,7 +303,7 @@ namespace SkyrimLauncher
             {
                 goodSort = true;
             }
-            if (!goodSort)
+            if (!goodSort || indexError)
             {
                 item.ForeColor = Color.Red;
             }

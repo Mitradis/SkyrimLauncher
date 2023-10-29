@@ -332,7 +332,7 @@ namespace SkyrimLauncher
                 "UpdatesExtension=1",
                 "UpdateHost=http://www.www.www/",
                 "",
-                "Mods",
+                "[Mods]",
                 "installedMods=",
                 "",
                 "[Clearing]",
