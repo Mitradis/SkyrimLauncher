@@ -156,10 +156,8 @@ namespace SkyrimLauncher
         {
             try
             {
-                using (Font strikeout = new Font(font, 10, style))
-                {
-                    return true;
-                }
+                Font strikeout = new Font(font, 10, style);
+                return strikeout != null;
             }
             catch
             {

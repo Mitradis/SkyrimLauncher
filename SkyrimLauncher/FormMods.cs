@@ -103,8 +103,11 @@ namespace SkyrimLauncher
                     }
                 }
                 listView1.SelectedItems[0].BackColor = Color.PaleGreen;
-                installedMods.Add(listView1.SelectedItems[0].Text);
-                FuncParser.iniWrite(FormMain.pathLauncherINI, "Mods", "installedMods", String.Join("|", installedMods));
+                if (!installedMods.Exists(s => s.Equals(listView1.SelectedItems[0].Text, StringComparison.OrdinalIgnoreCase)))
+                {
+                    installedMods.Add(listView1.SelectedItems[0].Text);
+                    FuncParser.iniWrite(FormMain.pathLauncherINI, "Mods", "installedMods", String.Join("|", installedMods));
+                }
             }
             else
             {

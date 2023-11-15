@@ -232,7 +232,7 @@ namespace SkyrimLauncher
                             FuncMisc.setFormFont(this);
                             break;
                         }
-                        else if (i == 0)
+                        else if (i == count - 1)
                         {
                             customFont = null;
                         }
@@ -573,7 +573,7 @@ namespace SkyrimLauncher
             if (FuncMisc.dialogResult(textQuestionFolder, textSourceSelection))
             {
                 folderBrowserDialog1.SelectedPath = pathGameFolder;
-                bool single = !FuncMisc.dialogResult(textSingleFolder, textSourceSelection);
+                bool single = FuncMisc.dialogResult(textSingleFolder, textSourceSelection);
                 DialogResult result = folderBrowserDialog1.ShowDialog();
                 if (result == DialogResult.OK && checkFolder(folderBrowserDialog1.SelectedPath))
                 {
@@ -862,7 +862,7 @@ namespace SkyrimLauncher
             textSetSettings = " настройки установлены.";
             textSetSettingsFail = "Не удалось сбросить настройки. Проверьте права доступа к ini файлам в: " + Environment.NewLine + pathMyDoc;
             textSettingsReset = "Сбросить настройки?";
-            textSingleFolder = "Добавить содержимое папки? Или содержимое будет полностью игнорироваться при очистке.";
+            textSingleFolder = "Игнорировать содержимое папки? Или содержимое будет зафиксировано в текущем виде.";
             textSourceSelection = "Выбор источника";
             textUseStandart = "Будут использованы стандартные шаблоны настроек т.к. не найден файл: " + Environment.NewLine;
             toolTip1.SetToolTip(button_AddIgnoreFiles, "Добавление файла(ов) с папкой(ами) в шаблон игнор листа.");
@@ -910,7 +910,7 @@ namespace SkyrimLauncher
             textSetSettings = " settings are set.";
             textSetSettingsFail = "Failed to reset settings. Check permissions for ini files in: " + Environment.NewLine + pathMyDoc;
             textSettingsReset = "Reset settings?";
-            textSingleFolder = "Add folder contents? Or the content will be completely ignored when cleared.";
+            textSingleFolder = "Ignore folder contents? Or the content will be frozen in its current form.";
             textSourceSelection = "Source selection";
             textUseStandart = "Standard templates of settings will be used because file not found: " + Environment.NewLine;
             toolTip1.SetToolTip(button_AddIgnoreFiles, "Adding a file(s) with folder(s) to the ignore list template.");

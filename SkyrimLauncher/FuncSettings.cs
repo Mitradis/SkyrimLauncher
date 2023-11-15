@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace SkyrimLauncher
@@ -175,6 +176,7 @@ namespace SkyrimLauncher
                 FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMaxSkinDecalsPerFrame", "75");
                 FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMaxDecalsPerFrame", "350");
             }
+            FuncParser.iniWrite(Path.Combine(FormMain.pathDataFolder + "SKSE", "Plugins", "hdtphysicsextensions.ini"), "Simulator", "numThreads", Environment.ProcessorCount.ToString());
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Display", "fNearDistance", "15.0000");
             FuncParser.iniWrite(FormMain.pathLauncherINI, "Game", "ZFighting", "false");
             FormMain.settingsPreset = value;
@@ -558,13 +560,14 @@ namespace SkyrimLauncher
                 "Wearable Lantern.esp",
                 "DisableFastTravel.esp",
                 "Immersive Citizens.esp",
+                "Touring Carriages.esp",
                 "Dual Sheath Redux.esp",
                 "Dual Wield Parrying.esp",
                 "JaxonzMapMarkers.esp",
                 "WondersOfWeather.esp",
                 "AlwaysPickUpBooks.esp",
-                "Customizable Camera.esp",
                 "Follower Commentary.esp",
+                "Customizable Camera.esp",
                 "StaticLoadingScreens.esp",
                 "RemoveFakeDirectLight.esp",
                 "Occlusion Of The Worlds.esp",

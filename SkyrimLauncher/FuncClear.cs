@@ -241,6 +241,8 @@ namespace SkyrimLauncher
                 "data|tools|generatefnis_for_users|patchlist.txt",
                 "data|tools|generatefnis_for_users|templates",
                 "data|tools|generatefnis_for_users|temporary_logs|.temporary_logs.txt",
+                "data|touring carriages.bsa",
+                "data|touring carriages.esp",
                 "data|uiextensions.bsa",
                 "data|uiextensions.esp",
                 "data|unofficial skyrim legendary edition patch.bsa",
