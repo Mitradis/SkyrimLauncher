@@ -153,13 +153,13 @@ namespace SkyrimLauncher
 
                 FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fShadowDistance", "8000.0000");
 
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fTreeLoadDistance", "75000.0000");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockMaximumDistance", "250000.0000");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockLevel1Distance", "70000.0000");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockLevel0Distance", "35000.0000");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fSplitDistanceMult", "1.5000");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fTreesMidLODSwitchDist", "16896.0000");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "MAIN", "fSkyCellRefFadeDistance", "600000.0000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fTreeLoadDistance", "40000.0000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockMaximumDistance", "150000.0000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockLevel1Distance", "40000.0000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockLevel0Distance", "25000.0000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fSplitDistanceMult", "1.1000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fTreesMidLODSwitchDist", "5000.0000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "MAIN", "fSkyCellRefFadeDistance", "300000.0000");
 
                 FuncParser.iniWrite(FormMain.pathSkyrimINI, "Water", "bReflectLODLand", "1");
                 FuncParser.iniWrite(FormMain.pathSkyrimINI, "Water", "bReflectLODObjects", "1");
@@ -392,8 +392,8 @@ namespace SkyrimLauncher
                 "bDrawLandShadows=1",
                 "bShadowsOnGrass=1",
                 "bFull Screen=1",
-                "iSize H=1280",
-                "iSize W=720",
+                "iSize H=720",
+                "iSize W=1280",
                 "fMeshLODFadePercentDefault=1.2000",
                 "fMeshLODFadeBoundDefault=256.0000",
                 "fMeshLODLevel2FadeTreeDistance=2048.0000",
@@ -513,7 +513,6 @@ namespace SkyrimLauncher
         public static List<string> pluginsTXT()
         {
             return new List<string> {
-                "Update.esm",
                 "Dawnguard.esm",
                 "HearthFires.esm",
                 "Dragonborn.esm",
@@ -526,7 +525,6 @@ namespace SkyrimLauncher
                 "Campfire.esm",
                 "OSA.esm",
                 "FNIS.esp",
-                "getSnowy.esp",
                 "CoinPurse.esp",
                 "UIExtensions.esp",
                 "AlternateStart.esp",
@@ -547,6 +545,7 @@ namespace SkyrimLauncher
                 "SkyUI.esp",
                 "iHUD.esp",
                 "iNeed.esp",
+                "getSnowy.esp",
                 "Frostfall.esp",
                 "Ordinator.esp",
                 "Footprints.esp",

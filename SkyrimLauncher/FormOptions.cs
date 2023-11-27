@@ -20,6 +20,7 @@ namespace SkyrimLauncher
         string textGrassDensity = "iMinGrassSize - расстояние между кустами травы, меньше - плотнее.";
         string textMaxFPS = "fMaxTime - отвечает за поведение физики в игре при разном FPS.";
         string textNearDistance = "Меньше - сильнее мерцания. Больше - больше отсечения объектов вблизи.";
+        string perfomance = "Установка этого параметра в положение Ультра вызовет заикания игры при передвижении.";
         string textRedateMods = "Массовое изменение даты изменения файлов по возрастанию.";
         string textShadowResolution = "iShadowMapResolution - \"тяжелый\" параметр теней.";
         string textZFighting = "Уменьшает мерцание гор вдали.";
@@ -139,6 +140,7 @@ namespace SkyrimLauncher
             textGrassDensity = "iMinGrassSize - distance between the grass bushes, smaller - denser.";
             textNearDistance = "Less - stronger flickering of mountains. Larger - stronger clipping textures near objects.";
             textMaxFPS = "fMaxTime - responsible for the correct operation of the game with different FPS.";
+            perfomance = "Setting this to Ultra will cause the game to stutter when moving.";
             textRedateMods = "Mass change of the date of change of files in ascending order.";
             textShadowResolution = "iShadowMapResolution - \"heaviest\" shadow parameter.";
             textZFighting = "Reduces the flickering of mountains away.";
@@ -464,7 +466,7 @@ namespace SkyrimLauncher
             List<string> writeList = new List<string>();
             foreach (ListViewItem item in listView1.CheckedItems)
             {
-                if (!String.Equals(item.Text, "Skyrim.esm", StringComparison.OrdinalIgnoreCase))
+                if (!String.Equals(item.Text, "Skyrim.esm", StringComparison.OrdinalIgnoreCase) && !String.Equals(item.Text, "Update.esm", StringComparison.OrdinalIgnoreCase))
                 {
                     writeList.Add(item.Text);
                 }
@@ -714,6 +716,7 @@ namespace SkyrimLauncher
             }
             else if (comboBox_LODObjectsTAB.SelectedIndex == 3)
             {
+                MessageBox.Show(perfomance);
                 setLODObjects("75000.0000", "250000.0000", "70000.0000", "35000.0000", "1.5000", "16896.0000", "600000.0000");
             }
         }
