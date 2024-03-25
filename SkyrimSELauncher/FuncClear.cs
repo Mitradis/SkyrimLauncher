@@ -25,13 +25,13 @@ namespace SkyrimSELauncher
             string line = FuncParser.stringRead(FormMain.pathLauncherINI, "Clearing", "IgnoreList");
             if (!String.IsNullOrEmpty(line))
             {
-                ignoreImportList.AddRange(line.Split(new string[] { "¦" }, StringSplitOptions.None));
+                ignoreImportList.AddRange(line.Split(new string[] { "¦" }, StringSplitOptions.RemoveEmptyEntries));
             }
             ingoredFoldersImportList = ingoredFoldersList();
             line = FuncParser.stringRead(FormMain.pathLauncherINI, "Clearing", "FoldersIgnored");
             if (!String.IsNullOrEmpty(line))
             {
-                ingoredFoldersImportList.AddRange(line.Split(new string[] { "¦" }, StringSplitOptions.None));
+                ingoredFoldersImportList.AddRange(line.Split(new string[] { "¦" }, StringSplitOptions.RemoveEmptyEntries));
             }
             changeSeparator(ignoreImportList, FormMain.pathSeparator);
             changeSeparator(ingoredFoldersImportList, FormMain.pathSeparator);

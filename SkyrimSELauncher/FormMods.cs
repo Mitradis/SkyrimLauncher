@@ -28,7 +28,7 @@ namespace SkyrimSELauncher
             string joinline = FuncParser.stringRead(FormMain.pathLauncherINI, "Mods", "installedMods");
             if (!String.IsNullOrEmpty(joinline))
             {
-                installedMods.AddRange(joinline.Split(new string[] { "|" }, StringSplitOptions.None));
+                installedMods.AddRange(joinline.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries));
             }
             refreshFileList();
         }
@@ -81,7 +81,7 @@ namespace SkyrimSELauncher
                 {
                     if (FuncParser.keyExists(file, "INSTALL", "ADDARCHIVES"))
                     {
-                        foreach (string line in FuncParser.stringRead(file, "INSTALL", "ADDARCHIVES").Split(new string[] { "|" }, StringSplitOptions.None))
+                        foreach (string line in FuncParser.stringRead(file, "INSTALL", "ADDARCHIVES").Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries))
                         {
                             FuncMisc.resourceArchives(line, false);
                         }
@@ -138,7 +138,7 @@ namespace SkyrimSELauncher
                         }
                         if (FuncParser.keyExists(file, "INSTALL", "ADDARCHIVES"))
                         {
-                            foreach (string line in FuncParser.stringRead(file, "INSTALL", "ADDARCHIVES").Split(new string[] { "|" }, StringSplitOptions.None))
+                            foreach (string line in FuncParser.stringRead(file, "INSTALL", "ADDARCHIVES").Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries))
                             {
                                 FuncMisc.resourceArchives(line, true);
                             }

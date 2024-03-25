@@ -239,7 +239,7 @@ namespace SkyrimLauncher
                 {
                     if (archives != null)
                     {
-                        List<string> list = new List<string>(archives.Split(new string[] { "," }, StringSplitOptions.None));
+                        List<string> list = new List<string>(archives.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
                         int count = list.Count;
                         for (int i = 0; i < count; i++)
                         {

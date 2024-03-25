@@ -486,7 +486,7 @@ namespace SkyrimSELauncher
                 {
                     if (single)
                     {
-                        List<string> path = new List<string>(folderBrowserDialog1.SelectedPath.Remove(0, gameDirLength).Split(new string[] { pathSeparator }, StringSplitOptions.None));
+                        List<string> path = new List<string>(folderBrowserDialog1.SelectedPath.Remove(0, gameDirLength).Split(new string[] { pathSeparator }, StringSplitOptions.RemoveEmptyEntries));
                         addIgnoreList(ignoreList, FoldersIgnored, path, single);
                         path.Clear();
                         writeIgnoreList(FoldersIgnored, false);
@@ -495,7 +495,7 @@ namespace SkyrimSELauncher
                     {
                         foreach (string line in Directory.GetFileSystemEntries(folderBrowserDialog1.SelectedPath, "*", SearchOption.AllDirectories))
                         {
-                            List<string> path = new List<string>(line.Remove(0, gameDirLength).Split(new string[] { pathSeparator }, StringSplitOptions.None));
+                            List<string> path = new List<string>(line.Remove(0, gameDirLength).Split(new string[] { pathSeparator }, StringSplitOptions.RemoveEmptyEntries));
                             addIgnoreList(ignoreList, FoldersIgnored, path);
                             path.Clear();
                         }
@@ -511,7 +511,7 @@ namespace SkyrimSELauncher
                 {
                     foreach (string line in openFileDialog1.FileNames)
                     {
-                        List<string> path = new List<string>(line.Remove(0, gameDirLength).Split(new string[] { pathSeparator }, StringSplitOptions.None));
+                        List<string> path = new List<string>(line.Remove(0, gameDirLength).Split(new string[] { pathSeparator }, StringSplitOptions.RemoveEmptyEntries));
                         addIgnoreList(ignoreList, FoldersIgnored, path);
                         path.Clear();
                     }
@@ -557,7 +557,7 @@ namespace SkyrimSELauncher
             string joinline = FuncParser.stringRead(pathLauncherINI, "Clearing", one ? "IgnoreList" : "FoldersIgnored");
             if (!String.IsNullOrEmpty(joinline))
             {
-                ignoreList.AddRange(joinline.Split(new string[] { "¦" }, StringSplitOptions.None));
+                ignoreList.AddRange(joinline.Split(new string[] { "¦" }, StringSplitOptions.RemoveEmptyEntries));
                 foreach (string line in list)
                 {
                     if ((one && !ignoreList.Exists(s => s.StartsWith(line, StringComparison.OrdinalIgnoreCase))) || (!one && !ignoreList.Exists(s => s.Equals(line, StringComparison.OrdinalIgnoreCase))))
