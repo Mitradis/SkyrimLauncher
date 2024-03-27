@@ -25,12 +25,12 @@ namespace SkyrimLauncher
             button_Updates.Visible = !hide;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void ImageBackgroundImage()
+        void ImageBackgroundImage()
         {
             BackgroundImage = Properties.Resources.FormBackground;
             label2.ForeColor = System.Drawing.SystemColors.ControlLight;
         }
-        private void langTranslateEN()
+        void langTranslateEN()
         {
             comboBox_Styles.Items.Clear();
             comboBox_Styles.Items.AddRange(new object[] { "Bright", "Dark" });
@@ -41,7 +41,7 @@ namespace SkyrimLauncher
             button_EN.BackgroundImage = Properties.Resources.EN;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_Styles_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_Styles_SelectedIndexChanged(object sender, EventArgs e)
         {
             FormMain.numberStyle = comboBox_Styles.SelectedIndex + 1;
             FormMain.formMain.refreshStyle();
@@ -55,12 +55,12 @@ namespace SkyrimLauncher
                 ImageBackgroundImage();
             }
         }
-        private void refreshStyles()
+        void refreshStyles()
         {
             FuncMisc.refreshComboBox(comboBox_Styles, new double[] { 1, 2 }, FormMain.numberStyle, comboBox_Styles_SelectedIndexChanged);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_RU_Click(object sender, EventArgs e)
+        void button_RU_Click(object sender, EventArgs e)
         {
             FormMain.langTranslate = "RU";
             FormMain.formMain.setLangTranslateRU();
@@ -72,14 +72,14 @@ namespace SkyrimLauncher
             button_EN.BackgroundImage = Properties.Resources.ENoff;
             button_RU.BackgroundImage = Properties.Resources.RU;
         }
-        private void button_EN_Click(object sender, EventArgs e)
+        void button_EN_Click(object sender, EventArgs e)
         {
             FormMain.langTranslate = "EN";
             FormMain.formMain.setLangTranslateEN();
             langTranslateEN();
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Updates_Click(object sender, EventArgs e)
+        void button_Updates_Click(object sender, EventArgs e)
         {
             Form form = new FormUpdates();
             if (form.ShowDialog(Owner) == DialogResult.OK)

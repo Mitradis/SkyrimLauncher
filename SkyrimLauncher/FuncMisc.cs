@@ -176,7 +176,7 @@ namespace SkyrimLauncher
                 {
                     if (FormMain.aspectRatio != i)
                     {
-                        FuncFiles.unpackArhive(FormMain.pathSystemFolder + "AR(" + i.ToString() + ")", true, true);
+                        FuncFiles.unpackArhive(FormMain.pathSystemFolder + "AR(" + i + ")", true, true);
                         FormMain.aspectRatio = i;
                     }
                     break;

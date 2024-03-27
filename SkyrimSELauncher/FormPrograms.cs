@@ -19,40 +19,40 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void imageBackgroundImage()
+        void imageBackgroundImage()
         {
             BackgroundImage = Properties.Resources.FormBackground;
             label2.ForeColor = System.Drawing.SystemColors.ControlLight;
         }
-        private void langTranslateEN()
+        void langTranslateEN()
         {
             label2.Text = "Unpack programs at " + Environment.NewLine + "the root of the game:";
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_CreationKit_Click(object sender, EventArgs e)
+        void button_CreationKit_Click(object sender, EventArgs e)
         {
             programsUnpack("CreationKit");
         }
-        private void button_TES5Edit_Click(object sender, EventArgs e)
+        void button_TES5Edit_Click(object sender, EventArgs e)
         {
             programsUnpack("SSEEDIT");
         }
-        private void button_TES5LODGen_Click(object sender, EventArgs e)
+        void button_TES5LODGen_Click(object sender, EventArgs e)
         {
             programsUnpack("SSELODGen");
         }
-        private void programsUnpack(string FileName)
+        void programsUnpack(string FileName)
         {
             FuncMisc.toggleButtons(this, false);
-            FuncFiles.unpackArhive(FormMain.pathProgramsFolder + FileName, true, false);
+            FuncFiles.unpackArhive(FormMain.pathProgramsFolder + FileName, true);
             FuncMisc.toggleButtons(this, true);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Close_MouseEnter(object sender, EventArgs e)
+        void button_Close_MouseEnter(object sender, EventArgs e)
         {
             button_Close.BackgroundImage = Properties.Resources.buttonCloseGlow;
         }
-        private void button_Close_MouseLeave(object sender, EventArgs e)
+        void button_Close_MouseLeave(object sender, EventArgs e)
         {
             button_Close.BackgroundImage = Properties.Resources.buttonClose;
         }

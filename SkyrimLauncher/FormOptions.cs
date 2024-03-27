@@ -74,12 +74,12 @@ namespace SkyrimLauncher
             timer2.Enabled = true;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void imageBackgroundImage()
+        void imageBackgroundImage()
         {
             BackgroundImage = Properties.Resources.FormBackground;
             FuncMisc.textColor(this, true);
         }
-        private void timer2_Tick(object sender, EventArgs e)
+        void timer2_Tick(object sender, EventArgs e)
         {
             if (lastWriteData != Directory.GetLastWriteTime(FormMain.pathDataFolder))
             {
@@ -89,7 +89,7 @@ namespace SkyrimLauncher
                 lastWriteData = Directory.GetLastWriteTime(FormMain.pathDataFolder);
             }
         }
-        private void langTranslateEN()
+        void langTranslateEN()
         {
             button_ActivatedAll.Text = "Enable all";
             button_Common.Text = "Common";
@@ -146,7 +146,7 @@ namespace SkyrimLauncher
             textZFighting = "Reduces the flickering of mountains away.";
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void refreshSettings()
+        void refreshSettings()
         {
             refreshAF();
             refreshActors();
@@ -178,7 +178,7 @@ namespace SkyrimLauncher
             comboBox_AATAB.Enabled = FormMain.setupENB < 2;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void listView1_MouseDown(object sender, MouseEventArgs e)
+        void listView1_MouseDown(object sender, MouseEventArgs e)
         {
             itemStartMove = GetItemFromPoint(listView1, Cursor.Position);
             if (!blockRefreshList && itemStartMove != null && !ignoreNames.Exists(s => s.Equals(itemStartMove.Text, StringComparison.OrdinalIgnoreCase)))
@@ -187,7 +187,7 @@ namespace SkyrimLauncher
                 timer1.Enabled = true;
             }
         }
-        private void listView1_MouseUp(object sender, MouseEventArgs e)
+        void listView1_MouseUp(object sender, MouseEventArgs e)
         {
             if (startMoveItem)
             {
@@ -211,7 +211,7 @@ namespace SkyrimLauncher
                 itemStartMove = null;
             }
         }
-        private void listView1_MouseLeave(object sender, EventArgs e)
+        void listView1_MouseLeave(object sender, EventArgs e)
         {
             if (startMoveItem)
             {
@@ -221,7 +221,7 @@ namespace SkyrimLauncher
                 listView1.Cursor = Cursors.Default;
             }
         }
-        private void timer1_Tick(object sender, EventArgs e)
+        void timer1_Tick(object sender, EventArgs e)
         {
             if (startMoveItem)
             {
@@ -234,7 +234,7 @@ namespace SkyrimLauncher
             return listView.GetItemAt(localPoint.X, localPoint.Y);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (e.Item.Index != -1)
             {
@@ -243,7 +243,7 @@ namespace SkyrimLauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void listView1_ItemChecked(object sender, ItemCheckedEventArgs e)
+        void listView1_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             if (!blockRefreshList)
             {
@@ -271,7 +271,7 @@ namespace SkyrimLauncher
                 blockRefreshList = false;
             }
         }
-        private void checkItem(ListViewItem item, bool check)
+        void checkItem(ListViewItem item, bool check)
         {
             int lastIndex = -1;
             bool goodSort = false;
@@ -322,7 +322,7 @@ namespace SkyrimLauncher
                 item.Checked = goodAllMasters;
             }
         }
-        private void uncheckItem(string item)
+        void uncheckItem(string item)
         {
             int count = listView1.Items.Count;
             for (int i = 0; i < count; i++)
@@ -337,7 +337,7 @@ namespace SkyrimLauncher
                 }
             }
         }
-        private void scanAllMods()
+        void scanAllMods()
         {
             foreach (ListViewItem item in listView1.Items)
             {
@@ -346,7 +346,7 @@ namespace SkyrimLauncher
             }
             setFileID();
         }
-        private void setFileID()
+        void setFileID()
         {
             int fileID = 0;
             int count = listView1.Items.Count;
@@ -363,7 +363,7 @@ namespace SkyrimLauncher
                 }
             }
         }
-        private void refreshModsList()
+        void refreshModsList()
         {
             blockRefreshList = true;
             listView1.Items.Clear();
@@ -440,7 +440,7 @@ namespace SkyrimLauncher
             }
             blockRefreshList = false;
         }
-        private void addToListView(string line, bool check)
+        void addToListView(string line, bool check)
         {
             ListViewItem item = new ListViewItem();
             item.Text = line;
@@ -461,7 +461,7 @@ namespace SkyrimLauncher
                 }
             }
         }
-        private void writeMasterFile()
+        void writeMasterFile()
         {
             List<string> writeList = new List<string>();
             foreach (ListViewItem item in listView1.CheckedItems)
@@ -479,10 +479,10 @@ namespace SkyrimLauncher
             }
             FuncFiles.writeToFile(pathToLoader, writeList);
             writeList.Clear();
-            label8.Text = listView1.CheckedItems.Count.ToString() + " / " + listView1.Items.Count.ToString();
+            label8.Text = listView1.CheckedItems.Count + " / " + listView1.Items.Count;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_ActivatedAll_Click(object sender, EventArgs e)
+        void button_ActivatedAll_Click(object sender, EventArgs e)
         {
             blockRefreshList = true;
             foreach (ListViewItem item in listView1.Items)
@@ -497,7 +497,7 @@ namespace SkyrimLauncher
             blockRefreshList = false;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Restore_Click(object sender, EventArgs e)
+        void button_Restore_Click(object sender, EventArgs e)
         {
             FuncFiles.deleteAny(FormMain.pathAppData + "Plugins.txt");
             FuncFiles.deleteAny(FormMain.pathAppData + "LoadOrder.txt");
@@ -514,7 +514,7 @@ namespace SkyrimLauncher
             refreshModsList();
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_RedateMods_Click(object sender, EventArgs e)
+        void button_RedateMods_Click(object sender, EventArgs e)
         {
             if (listView1.Items.Count > 0)
             {
@@ -545,34 +545,34 @@ namespace SkyrimLauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Low_Click(object sender, EventArgs e)
+        void button_Low_Click(object sender, EventArgs e)
         {
             FuncSettings.setSettingsPreset(0);
             refreshSettings();
         }
-        private void button_Medium_Click(object sender, EventArgs e)
+        void button_Medium_Click(object sender, EventArgs e)
         {
             FuncSettings.setSettingsPreset(1);
             refreshSettings();
         }
-        private void button_Hight_Click(object sender, EventArgs e)
+        void button_Hight_Click(object sender, EventArgs e)
         {
             FuncSettings.setSettingsPreset(2);
             refreshSettings();
         }
-        private void button_Ultra_Click(object sender, EventArgs e)
+        void button_Ultra_Click(object sender, EventArgs e)
         {
             FuncSettings.setSettingsPreset(3);
             refreshSettings();
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_ResolutionTAB_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_ResolutionTAB_SelectedIndexChanged(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iSize W", screenListW[comboBox_ResolutionTAB.SelectedIndex].ToString());
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iSize H", screenListH[comboBox_ResolutionTAB.SelectedIndex].ToString());
             aspectRatioFiles();
         }
-        private void refreshScreenResolution()
+        void refreshScreenResolution()
         {
             screenListW.Clear();
             screenListH.Clear();
@@ -583,7 +583,7 @@ namespace SkyrimLauncher
                 int count = screenListW.Count;
                 for (int i = 0; i < count; i++)
                 {
-                    comboBox_ResolutionTAB.Items.Add(screenListW[i].ToString() + " x " + screenListH[i].ToString());
+                    comboBox_ResolutionTAB.Items.Add(screenListW[i] + " x " + screenListH[i]);
                 }
             }
             comboBox_ResolutionTAB.SelectedIndexChanged -= comboBox_ResolutionTAB_SelectedIndexChanged;
@@ -591,7 +591,7 @@ namespace SkyrimLauncher
             comboBox_ResolutionTAB.SelectedIndexChanged += comboBox_ResolutionTAB_SelectedIndexChanged;
             aspectRatioFiles();
         }
-        private void aspectRatioFiles()
+        void aspectRatioFiles()
         {
             if (comboBox_ResolutionTAB.SelectedIndex != -1)
             {
@@ -599,14 +599,14 @@ namespace SkyrimLauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_ScreenTAB_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_ScreenTAB_SelectedIndexChanged(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Display", "iAdapter", comboBox_ScreenTAB.SelectedIndex.ToString());
             selectedScreen = screens[comboBox_ScreenTAB.SelectedIndex].DeviceName;
             refreshScreenResolution();
             FuncSettings.restoreENBAdapter();
         }
-        private void refreshScreenIndex()
+        void refreshScreenIndex()
         {
             comboBox_ScreenTAB.Items.Clear();
             if (screens.Length > 0)
@@ -628,16 +628,16 @@ namespace SkyrimLauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_AATAB_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_AATAB_SelectedIndexChanged(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMultiSample", comboBox_AATAB.SelectedItem.ToString());
         }
-        private void refreshAA()
+        void refreshAA()
         {
             FuncMisc.refreshComboBox(comboBox_AATAB, new double[] { 0, 2, 4, 8 }, FuncParser.intRead(FormMain.pathSkyrimPrefsINI, "Display", "iMultiSample"), comboBox_AATAB_SelectedIndexChanged);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_AFTAB_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_AFTAB_SelectedIndexChanged(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMaxAnisotropy", comboBox_AFTAB.SelectedItem.ToString());
             if (File.Exists(FormMain.pathENBLocalINI))
@@ -645,30 +645,30 @@ namespace SkyrimLauncher
                 FuncParser.iniWrite(FormMain.pathENBLocalINI, "ENGINE", "MaxAnisotropy", comboBox_AFTAB.SelectedItem.ToString());
             }
         }
-        private void refreshAF()
+        void refreshAF()
         {
             FuncMisc.refreshComboBox(comboBox_AFTAB, new double[] { 0, 2, 4, 8, 16 }, FuncParser.intRead(FormMain.pathSkyrimPrefsINI, "Display", "iMaxAnisotropy"), comboBox_AFTAB_SelectedIndexChanged);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_ShadowTAB_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_ShadowTAB_SelectedIndexChanged(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iShadowMapResolution", comboBox_ShadowTAB.SelectedItem.ToString());
         }
-        private void refreshShadow()
+        void refreshShadow()
         {
             FuncMisc.refreshComboBox(comboBox_ShadowTAB, new double[] { 512, 1024, 2048, 4096 }, FuncParser.intRead(FormMain.pathSkyrimPrefsINI, "Display", "iShadowMapResolution"), comboBox_ShadowTAB_SelectedIndexChanged);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_TexturesTAB_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_TexturesTAB_SelectedIndexChanged(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iTexMipMapSkip", comboBox_TexturesTAB.SelectedIndex.ToString());
         }
-        private void refreshTextures()
+        void refreshTextures()
         {
             FuncMisc.refreshComboBox(comboBox_TexturesTAB, new double[] { 0, 1, 2 }, FuncParser.intRead(FormMain.pathSkyrimPrefsINI, "Display", "iTexMipMapSkip"), comboBox_TexturesTAB_SelectedIndexChanged);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_DecalsTAB_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_DecalsTAB_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox_DecalsTAB.SelectedIndex == 0)
             {
@@ -687,7 +687,7 @@ namespace SkyrimLauncher
                 setDecals("1", "7", "70", "90.0000", "75");
             }
         }
-        private void setDecals(string bDecals, string uMaxSkinDecalPerActor, string uMaxSkinDecals, string fDecalLifetime, string iMaxSkinDecalsPerFrame)
+        void setDecals(string bDecals, string uMaxSkinDecalPerActor, string uMaxSkinDecals, string fDecalLifetime, string iMaxSkinDecalsPerFrame)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Decals", "bDecals", bDecals);
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Decals", "uMaxSkinDecalPerActor", uMaxSkinDecalPerActor);
@@ -695,12 +695,12 @@ namespace SkyrimLauncher
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Display", "fDecalLifetime", fDecalLifetime);
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMaxSkinDecalsPerFrame", iMaxSkinDecalsPerFrame);
         }
-        private void refreshDecals()
+        void refreshDecals()
         {
             FuncMisc.refreshComboBox(comboBox_DecalsTAB, new double[] { 0, 35, 55, 75 }, FuncParser.intRead(FormMain.pathSkyrimPrefsINI, "Display", "iMaxSkinDecalsPerFrame"), comboBox_DecalsTAB_SelectedIndexChanged);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_LODObjectsTAB_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_LODObjectsTAB_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox_LODObjectsTAB.SelectedIndex == 0)
             {
@@ -720,7 +720,7 @@ namespace SkyrimLauncher
                 setLODObjects("75000.0000", "250000.0000", "70000.0000", "35000.0000", "1.5000", "16896.0000", "600000.0000");
             }
         }
-        private void setLODObjects(string fTreeLoadDistance, string fBlockMaximumDistance, string fBlockLevel1Distance, string fBlockLevel0Distance, string fSplitDistanceMult, string fTreesMidLODSwitchDist, string fSkyCellRefFadeDistance)
+        void setLODObjects(string fTreeLoadDistance, string fBlockMaximumDistance, string fBlockLevel1Distance, string fBlockLevel0Distance, string fSplitDistanceMult, string fTreesMidLODSwitchDist, string fSkyCellRefFadeDistance)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fTreeLoadDistance", fTreeLoadDistance);
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fTreesMidLODSwitchDist", fTreesMidLODSwitchDist);
@@ -733,43 +733,43 @@ namespace SkyrimLauncher
                 FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "MAIN", "fSkyCellRefFadeDistance", fSkyCellRefFadeDistance);
             }
         }
-        private void refreshLODObjects()
+        void refreshLODObjects()
         {
             FuncMisc.refreshComboBox(comboBox_LODObjectsTAB, new double[] { 12500, 25000, 40000, 75000 }, FuncParser.intRead(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fTreeLoadDistance"), comboBox_LODObjectsTAB_SelectedIndexChanged);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             FormMain.maxFPS = numericUpDown1.Value;
             FuncSettings.physicsFPS();
         }
-        private void refreshMaxFPS()
+        void refreshMaxFPS()
         {
             numericUpDown1.Value = FormMain.maxFPS;
             FuncSettings.physicsFPS();
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_WaterReflectTAB_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_WaterReflectTAB_SelectedIndexChanged(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Water", "iWaterReflectWidth", comboBox_WaterReflectTAB.SelectedItem.ToString());
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Water", "iWaterReflectHeight", comboBox_WaterReflectTAB.SelectedItem.ToString());
         }
-        private void refreshWaterReflect()
+        void refreshWaterReflect()
         {
             FuncMisc.refreshComboBox(comboBox_WaterReflectTAB, new double[] { 512, 1024, 2048 }, FuncParser.intRead(FormMain.pathSkyrimPrefsINI, "Water", "iWaterReflectWidth"), comboBox_WaterReflectTAB_SelectedIndexChanged);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_ZFighting_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_ZFighting_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FuncParser.iniWrite(FormMain.pathSkyrimINI, "Display", "fNearDistance", comboBox_ZFighting.SelectedItem.ToString() + ".0000");
+            FuncParser.iniWrite(FormMain.pathSkyrimINI, "Display", "fNearDistance", comboBox_ZFighting.SelectedItem + ".0000");
             FuncParser.iniWrite(FormMain.pathLauncherINI, "Game", "NearDistance", comboBox_ZFighting.SelectedItem.ToString());
         }
-        private void refreshZFightingCB()
+        void refreshZFightingCB()
         {
             FuncMisc.refreshComboBox(comboBox_ZFighting, new double[] { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }, FuncParser.intRead(FormMain.pathSkyrimINI, "Display", "fNearDistance"), comboBox_ZFighting_SelectedIndexChanged);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_ZFighting_Click(object sender, EventArgs e)
+        void button_ZFighting_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathLauncherINI, "Game", "ZFighting", (!zfighting).ToString().ToLower());
             refreshZFighting();
@@ -780,7 +780,7 @@ namespace SkyrimLauncher
                 refreshZFightingCB();
             }
         }
-        private void refreshZFighting()
+        void refreshZFighting()
         {
             zfighting = FuncMisc.refreshButton(button_ZFighting, FormMain.pathLauncherINI, "Game", "ZFighting");
             comboBox_ZFighting.Enabled = zfighting;
@@ -796,13 +796,13 @@ namespace SkyrimLauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Papyrus_Click(object sender, EventArgs e)
+        void button_Papyrus_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Papyrus", "bEnableLogging", Convert.ToInt32(!papyrus).ToString());
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Papyrus", "bEnableTrace", Convert.ToInt32(!papyrus).ToString());
             refreshPapyrus();
         }
-        private void refreshPapyrus()
+        void refreshPapyrus()
         {
             papyrus = FuncMisc.refreshButton(button_Papyrus, FormMain.pathSkyrimINI, "Papyrus", "bEnableLogging");
             if (papyrus)
@@ -810,7 +810,7 @@ namespace SkyrimLauncher
                 FuncFiles.creatDirectory(pathMyDocLogs);
             }
         }
-        private void button_LogsFolder_Click(object sender, EventArgs e)
+        void button_LogsFolder_Click(object sender, EventArgs e)
         {
             if (Directory.Exists(pathMyDocLogs))
             {
@@ -822,76 +822,76 @@ namespace SkyrimLauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_ReflectSkyTAB_Click(object sender, EventArgs e)
+        void button_ReflectSkyTAB_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Water", "bReflectSky", Convert.ToInt32(!rsky).ToString());
             refreshWaterReflectSky();
         }
-        private void refreshWaterReflectSky()
+        void refreshWaterReflectSky()
         {
             rsky = FuncMisc.refreshButton(button_ReflectSkyTAB, FormMain.pathSkyrimINI, "Water", "bReflectSky");
         }
-        private void button_ReflectLanscapeTAB_Click(object sender, EventArgs e)
+        void button_ReflectLanscapeTAB_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Water", "bReflectLODLand", Convert.ToInt32(!rland).ToString());
             refreshWaterReflectLand();
         }
-        private void refreshWaterReflectLand()
+        void refreshWaterReflectLand()
         {
             rland = FuncMisc.refreshButton(button_ReflectLanscapeTAB, FormMain.pathSkyrimINI, "Water", "bReflectLODLand");
         }
-        private void button_ReflectObjectsTAB_Click(object sender, EventArgs e)
+        void button_ReflectObjectsTAB_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Water", "bReflectLODObjects", Convert.ToInt32(!robj).ToString());
             refreshWaterReflectObjects();
         }
-        private void refreshWaterReflectObjects()
+        void refreshWaterReflectObjects()
         {
             robj = FuncMisc.refreshButton(button_ReflectObjectsTAB, FormMain.pathSkyrimINI, "Water", "bReflectLODObjects");
         }
-        private void button_ReflectTreesTAB_Click(object sender, EventArgs e)
+        void button_ReflectTreesTAB_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Water", "bReflectLODTrees", Convert.ToInt32(!rtree).ToString());
             refreshWaterReflectTrees();
         }
-        private void refreshWaterReflectTrees()
+        void refreshWaterReflectTrees()
         {
             rtree = FuncMisc.refreshButton(button_ReflectTreesTAB, FormMain.pathSkyrimINI, "Water", "bReflectLODTrees");
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_WindowTAB_Click(object sender, EventArgs e)
+        void button_WindowTAB_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "bFull Screen", Convert.ToInt32(window).ToString());
             refreshWindow();
         }
-        private void refreshWindow()
+        void refreshWindow()
         {
             window = FuncMisc.refreshButton(button_WindowTAB, FormMain.pathSkyrimPrefsINI, "Display", "bFull Screen", false, null, true);
             FuncSettings.restoreENBBorderless();
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_VsyncTAB_Click(object sender, EventArgs e)
+        void button_VsyncTAB_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Display", "iPresentInterval", Convert.ToInt32(!vsync).ToString());
             refreshVsync();
         }
-        private void refreshVsync()
+        void refreshVsync()
         {
             vsync = FuncMisc.refreshButton(button_VsyncTAB, FormMain.pathSkyrimINI, "Display", "iPresentInterval");
             FuncSettings.restoreENBVSync();
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_FXAATAB_Click(object sender, EventArgs e)
+        void button_FXAATAB_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "bFXAAEnabled", Convert.ToInt32(!fxaa).ToString());
             refreshFXAA();
         }
-        private void refreshFXAA()
+        void refreshFXAA()
         {
             fxaa = FuncMisc.refreshButton(button_FXAATAB, FormMain.pathSkyrimPrefsINI, "Display", "bFXAAEnabled");
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_HideObjectsTAB_Click(object sender, EventArgs e)
+        void button_HideObjectsTAB_Click(object sender, EventArgs e)
         {
             if (hideobjects)
             {
@@ -905,83 +905,83 @@ namespace SkyrimLauncher
             }
             refreshHideObjects();
         }
-        private void refreshHideObjects()
+        void refreshHideObjects()
         {
             hideobjects = FuncMisc.refreshButton(button_HideObjectsTAB, FormMain.pathSkyrimPrefsINI, "Display", "fMeshLODLevel1FadeDist", false, "4096.0000");
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void trackBar_GrassDensityTAB_Scroll(object sender, EventArgs e)
+        void trackBar_GrassDensityTAB_Scroll(object sender, EventArgs e)
         {
 
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Grass", "iMinGrassSize", (trackBar_GrassDensityTAB.Value * 5).ToString());
             label26TAB.Text = (trackBar_GrassDensityTAB.Value * 5).ToString();
         }
-        private void refreshGrass()
+        void refreshGrass()
         {
             FuncMisc.refreshTrackBar(trackBar_GrassDensityTAB, FormMain.pathSkyrimINI, "Grass", "iMinGrassSize", label26TAB, 5);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void trackBar_GrassDistanceTAB_Scroll(object sender, EventArgs e)
+        void trackBar_GrassDistanceTAB_Scroll(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Grass", "fGrassStartFadeDistance", (trackBar_GrassDistanceTAB.Value * 1000).ToString());
             label37TAB.Text = (trackBar_GrassDistanceTAB.Value * 1000).ToString();
         }
-        private void refreshGrassDistance()
+        void refreshGrassDistance()
         {
             FuncMisc.refreshTrackBar(trackBar_GrassDistanceTAB, FormMain.pathSkyrimPrefsINI, "Grass", "fGrassStartFadeDistance", label37TAB, 1000);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void trackBar_ObjectsTAB_Scroll(object sender, EventArgs e)
+        void trackBar_ObjectsTAB_Scroll(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "LOD", "fLODFadeOutMultObjects", (trackBar_ObjectsTAB.Value).ToString());
             label28TAB.Text = trackBar_ObjectsTAB.Value.ToString();
         }
-        private void refreshObjects()
+        void refreshObjects()
         {
             FuncMisc.refreshTrackBar(trackBar_ObjectsTAB, FormMain.pathSkyrimPrefsINI, "LOD", "fLODFadeOutMultObjects", label28TAB);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void trackBar_ItemsTAB_Scroll(object sender, EventArgs e)
+        void trackBar_ItemsTAB_Scroll(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "LOD", "fLODFadeOutMultItems", (trackBar_ItemsTAB.Value).ToString());
             label35TAB.Text = trackBar_ItemsTAB.Value.ToString();
         }
-        private void refreshItems()
+        void refreshItems()
         {
             FuncMisc.refreshTrackBar(trackBar_ItemsTAB, FormMain.pathSkyrimPrefsINI, "LOD", "fLODFadeOutMultItems", label35TAB);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void trackBar_ActorsTAB_Scroll(object sender, EventArgs e)
+        void trackBar_ActorsTAB_Scroll(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "LOD", "fLODFadeOutMultActors", (trackBar_ActorsTAB.Value).ToString());
             label30TAB.Text = trackBar_ActorsTAB.Value.ToString();
         }
-        private void refreshActors()
+        void refreshActors()
         {
             FuncMisc.refreshTrackBar(trackBar_ActorsTAB, FormMain.pathSkyrimPrefsINI, "LOD", "fLODFadeOutMultActors", label30TAB);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void trackBar_LightsTAB_Scroll(object sender, EventArgs e)
+        void trackBar_LightsTAB_Scroll(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fLightLODStartFade", (trackBar_LightsTAB.Value * 100).ToString());
             label32TAB.Text = (trackBar_LightsTAB.Value * 100).ToString();
         }
-        private void refreshLights()
+        void refreshLights()
         {
             FuncMisc.refreshTrackBar(trackBar_LightsTAB, FormMain.pathSkyrimPrefsINI, "Display", "fLightLODStartFade", label32TAB, 100);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void trackBar_ShadowTAB_Scroll(object sender, EventArgs e)
+        void trackBar_ShadowTAB_Scroll(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fShadowDistance", (trackBar_ShadowTAB.Value * 500).ToString());
             label39TAB.Text = (trackBar_ShadowTAB.Value * 500).ToString();
         }
-        private void refreshShadowRange()
+        void refreshShadowRange()
         {
             FuncMisc.refreshTrackBar(trackBar_ShadowTAB, FormMain.pathSkyrimPrefsINI, "Display", "fShadowDistance", label39TAB, 500);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void buttons_ChangeTabs_Click(object sender, EventArgs e)
+        void buttons_ChangeTabs_Click(object sender, EventArgs e)
         {
             foreach (Control line in Controls)
             {
@@ -994,11 +994,11 @@ namespace SkyrimLauncher
             button_Distance.Enabled = !button_Distance.Enabled;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Close_MouseEnter(object sender, EventArgs e)
+        void button_Close_MouseEnter(object sender, EventArgs e)
         {
             button_Close.BackgroundImage = Properties.Resources.buttonCloseGlow;
         }
-        private void button_Close_MouseLeave(object sender, EventArgs e)
+        void button_Close_MouseLeave(object sender, EventArgs e)
         {
             button_Close.BackgroundImage = Properties.Resources.buttonClose;
         }

@@ -347,7 +347,7 @@ namespace SkyrimLauncher
             ingoredFoldersImportList.Clear();
             ignoreImportList.Clear();
         }
-        private static void changeSeparator(List<string> list, string line)
+        static void changeSeparator(List<string> list, string line)
         {
             int count = list.Count;
             for (int i = 0; i < count; i++)
@@ -355,7 +355,7 @@ namespace SkyrimLauncher
                 list[i] = list[i].Replace("|", line);
             }
         }
-        private static void clearFolder(string path)
+        static void clearFolder(string path)
         {
             if (Directory.Exists(path))
             {

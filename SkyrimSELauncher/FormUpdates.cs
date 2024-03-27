@@ -56,12 +56,12 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void imageBackgroundImage()
+        void imageBackgroundImage()
         {
             BackgroundImage = Properties.Resources.FormBackground;
             FuncMisc.textColor(this, true);
         }
-        private void langTranslateEN()
+        void langTranslateEN()
         {
             button_AboutUpdate.Text = "About update";
             button_CheckUpdate.Text = "Check";
@@ -85,7 +85,7 @@ namespace SkyrimSELauncher
             textWrongPing = "No access to: ";
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_CheckUpdate_Click(object sender, EventArgs e)
+        void button_CheckUpdate_Click(object sender, EventArgs e)
         {
             if (stopDownload)
             {
@@ -167,12 +167,12 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_AboutUpdate_Click(object sender, EventArgs e)
+        void button_AboutUpdate_Click(object sender, EventArgs e)
         {
             MessageBox.Show(FuncParser.stringRead(pathUpdateFolder + nameUpdateInfo, "Update_" + numberSelectFile, "update_file_discription"));
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_UpdateCP_Click(object sender, EventArgs e)
+        void button_UpdateCP_Click(object sender, EventArgs e)
         {
             stopDownload = true;
             enableDisableButtons();
@@ -182,7 +182,7 @@ namespace SkyrimSELauncher
             client_DownloadProgressStart();
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void enableDisableButtons()
+        void enableDisableButtons()
         {
             if (updatesFound)
             {
@@ -235,7 +235,7 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void client_DownloadProgressStart()
+        void client_DownloadProgressStart()
         {
             try
             {
@@ -250,12 +250,12 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (stopDownload)
             {
@@ -344,7 +344,7 @@ namespace SkyrimSELauncher
                                 "Echo -Closing.",
                                 "TIMEOUT /T 2 /NOBREAK >nul 2>nul",
                                 "del \"" + FormMain.pathGameFolder + "Update.bat\" /Q >nul 2>nul"});
-                            FuncFiles.runProcess(FormMain.pathGameFolder + "Update.bat", null, null, true, false);
+                            FuncFiles.runProcess(FormMain.pathGameFolder + "Update.bat", null, null, true);
                             Application.Exit();
                         }
                         else
@@ -391,20 +391,20 @@ namespace SkyrimSELauncher
             }
             return false;
         }
-        private void unpackUpdates(bool readyDL)
+        void unpackUpdates(bool readyDL)
         {
             for (int i = 1; i <= 200; i++)
             {
-                if (FuncParser.keyExists(pathUpdateFolder + nameUpdateInfo, "Update_" + numberSelectFile, "update_delete_file_" + i.ToString()))
+                if (FuncParser.keyExists(pathUpdateFolder + nameUpdateInfo, "Update_" + numberSelectFile, "update_delete_file_" + i))
                 {
-                    FuncFiles.deleteAny(FormMain.pathGameFolder + FuncParser.stringRead(pathUpdateFolder + nameUpdateInfo, "Update_" + numberSelectFile, "update_delete_file_" + i.ToString()));
+                    FuncFiles.deleteAny(FormMain.pathGameFolder + FuncParser.stringRead(pathUpdateFolder + nameUpdateInfo, "Update_" + numberSelectFile, "update_delete_file_" + i));
                 }
                 else
                 {
                     break;
                 }
             }
-            FuncFiles.unpackArhive(pathUpdateFolder + "file" + numberSelectFile + textUpdateExt, false, false);
+            FuncFiles.unpackArhive(pathUpdateFolder + "file" + numberSelectFile + textUpdateExt);
             FuncParser.iniWrite(FormMain.pathLauncherINI, "Updates", "Update_" + numberSelectFile + "_Version", FuncParser.stringRead(pathUpdateFolder + nameUpdateInfo, "Update_" + numberSelectFile, "update_file_version"));
             comboBox_Updates_SelectedIndexChanged(this, new EventArgs());
             if (readyDL)
@@ -414,7 +414,7 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_Updates_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_Updates_SelectedIndexChanged(object sender, EventArgs e)
         {
             numberSelectFile = realIndex[comboBox_Updates.SelectedIndex];
             if (checkUpdateVersion(numberSelectFile))
@@ -439,15 +439,15 @@ namespace SkyrimSELauncher
             return false;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Close_MouseEnter(object sender, EventArgs e)
+        void button_Close_MouseEnter(object sender, EventArgs e)
         {
             button_Close.BackgroundImage = Properties.Resources.buttonCloseGlow;
         }
-        private void button_Close_MouseLeave(object sender, EventArgs e)
+        void button_Close_MouseLeave(object sender, EventArgs e)
         {
             button_Close.BackgroundImage = Properties.Resources.buttonClose;
         }
-        private void button_Close_Click(object sender, EventArgs e)
+        void button_Close_Click(object sender, EventArgs e)
         {
             client.DownloadProgressChanged -= new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
             client.DownloadFileCompleted -= new AsyncCompletedEventHandler(client_DownloadFileCompleted);

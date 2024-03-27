@@ -234,14 +234,14 @@ namespace SkyrimSELauncher
                 return cp;
             }
         }
-        private void FormMain_KeyUp(object sender, KeyEventArgs e)
+        void FormMain_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Space && button_Skyrim.Enabled)
             {
                 button_Skyrim_Click(this, new EventArgs());
             }
         }
-        private void closeControlPanel(object sender, EventArgs e)
+        void closeControlPanel(object sender, EventArgs e)
         {
             if (!File.Exists(pathLauncherINI))
             {
@@ -306,43 +306,43 @@ namespace SkyrimSELauncher
             AppDomain.CurrentDomain.ProcessExit -= new EventHandler(closeControlPanel);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_WryeBash_Click(object sender, EventArgs e)
+        void button_WryeBash_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             if (File.Exists(pathWB))
             {
                 pressedButtonEvent(button_WryeBash, BMbuttonFullPressed, button_MouseEnter, button_MouseLeave);
-                FuncFiles.runProcess(pathWB, null, closeWryeBash, false, false);
+                FuncFiles.runProcess(pathWB, null, closeWryeBash);
             }
             else
             {
                 MessageBox.Show(pathWB + textNotFound);
             }
         }
-        private void closeWryeBash(object sender, EventArgs e)
+        void closeWryeBash(object sender, EventArgs e)
         {
             raisedButtonEvent(button_WryeBash, BMbuttonFull, button_MouseEnter, button_MouseLeave);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_FNIS_Click(object sender, EventArgs e)
+        void button_FNIS_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             if (File.Exists(pathFNIS))
             {
                 pressedButtonEvent(button_FNIS, BMbuttonHalfPressed, button_Half_MouseEnter, button_Half_MouseLeave);
-                FuncFiles.runProcess(pathFNIS, null, closeFNIS, false, false);
+                FuncFiles.runProcess(pathFNIS, null, closeFNIS);
             }
             else
             {
                 MessageBox.Show(pathFNIS + textNotFound);
             }
         }
-        private void closeFNIS(object sender, EventArgs e)
+        void closeFNIS(object sender, EventArgs e)
         {
             raisedButtonEvent(button_FNIS, BMbuttonHalf, button_Half_MouseEnter, button_Half_MouseLeave);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_GameFolder_Click(object sender, EventArgs e)
+        void button_GameFolder_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             if (Directory.Exists(pathGameFolder))
@@ -355,12 +355,12 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_ProgramsFolder_Click(object sender, EventArgs e)
+        void button_ProgramsFolder_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             if (File.Exists(pathAllApps))
             {
-                FuncFiles.runProcess(pathAllApps, null, null, false, false);
+                FuncFiles.runProcess(pathAllApps);
             }
             else
             {
@@ -368,7 +368,7 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_MyDocs_Click(object sender, EventArgs e)
+        void button_MyDocs_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             if (Directory.Exists(pathMyDoc))
@@ -381,7 +381,7 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_ResetSettings_Click(object sender, EventArgs e)
+        void button_ResetSettings_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             if (FuncMisc.dialogResult(textSettingsReset, textConfirmTitle))
@@ -460,7 +460,7 @@ namespace SkyrimSELauncher
 
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_ClearDirectory_Click(object sender, EventArgs e)
+        void button_ClearDirectory_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             if (FuncMisc.dialogResult(textClearDirectory, textConfirmTitle))
@@ -472,7 +472,7 @@ namespace SkyrimSELauncher
                 FuncClear.clearGameFolder();
             }
         }
-        private void button_AddIgnoreFiles_Click(object sender, EventArgs e)
+        void button_AddIgnoreFiles_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             List<string> ignoreList = new List<string>();
@@ -533,7 +533,7 @@ namespace SkyrimSELauncher
                 return false;
             }
         }
-        private void addIgnoreList(List<string> list1, List<string> list2, List<string> path, bool single = false)
+        void addIgnoreList(List<string> list1, List<string> list2, List<string> path, bool single = false)
         {
             string line = null;
             int count = path.Count;
@@ -551,7 +551,7 @@ namespace SkyrimSELauncher
                 line += "|";
             }
         }
-        private void writeIgnoreList(List<string> list, bool one = true)
+        void writeIgnoreList(List<string> list, bool one = true)
         {
             List<string> ignoreList = new List<string>();
             string joinline = FuncParser.stringRead(pathLauncherINI, "Clearing", one ? "IgnoreList" : "FoldersIgnored");
@@ -574,7 +574,7 @@ namespace SkyrimSELauncher
             ignoreList.Clear();
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Options_Click(object sender, EventArgs e)
+        void button_Options_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             if (File.Exists(pathSkyrimINI) && File.Exists(pathSkyrimPrefsINI) && File.Exists(pathAppData + "Plugins.txt"))
@@ -586,11 +586,11 @@ namespace SkyrimSELauncher
                 MessageBox.Show(textNoInIFound);
             }
         }
-        private void button_Mods_Click(object sender, EventArgs e)
+        void button_Mods_Click(object sender, EventArgs e)
         {
             formShowDialog(new FormMods());
         }
-        private void button_Programs_Click(object sender, EventArgs e)
+        void button_Programs_Click(object sender, EventArgs e)
         {
             if (Directory.Exists(pathProgramsFolder))
             {
@@ -602,7 +602,7 @@ namespace SkyrimSELauncher
                 MessageBox.Show(pathProgramsFolder + textNotFound);
             }
         }
-        private void formShowDialog(Form form)
+        void formShowDialog(Form form)
         {
             labelMain.Focus();
             if (form.ShowDialog(this) == DialogResult.OK)
@@ -611,7 +611,7 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Skyrim_Click(object sender, EventArgs e)
+        void button_Skyrim_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             if (File.Exists(pathGameFolder + "SKSE.exe"))
@@ -619,20 +619,20 @@ namespace SkyrimSELauncher
                 pressedButtonEvent(button_Skyrim, BMbuttonlogoPressed, button_Skyrim_MouseEnter, button_Skyrim_MouseLeave);
                 if (argsStartsWith != null && File.Exists(argsStartsWith))
                 {
-                    FuncFiles.runProcess(argsStartsWith, null, null, true, false);
+                    FuncFiles.runProcess(argsStartsWith, null, null, true);
                 }
                 if (argsWaitBefore > 0)
                 {
                     Thread.Sleep(argsWaitBefore * 1000);
                 }
-                FuncFiles.runProcess(pathGameFolder + "SKSE.exe", "", closeSKSE, false, false);
+                FuncFiles.runProcess(pathGameFolder + "SKSE.exe", "", closeSKSE);
             }
             else
             {
                 MessageBox.Show(pathGameFolder + "SKSE.exe" + textNotFound);
             }
         }
-        private void closeSKSE(object sender, EventArgs e)
+        void closeSKSE(object sender, EventArgs e)
         {
             Process[] processes = Process.GetProcessesByName("SkyrimSE");
             if (processes.Length > 0)
@@ -645,17 +645,17 @@ namespace SkyrimSELauncher
                 closeGAME(this, new EventArgs());
             }
         }
-        private void closeGAME(object sender, EventArgs e)
+        void closeGAME(object sender, EventArgs e)
         {
             raisedButtonEvent(button_Skyrim, BMbuttonlogo, button_Skyrim_MouseEnter, button_Skyrim_MouseLeave);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Help_Click(object sender, EventArgs e)
+        void button_Help_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             if (File.Exists(pathHelp))
             {
-                FuncFiles.runProcess(pathHelp, null, null, true, false);
+                FuncFiles.runProcess(pathHelp, null, null, true);
             }
             else
             {
@@ -685,34 +685,34 @@ namespace SkyrimSELauncher
                 button_Widget.BackgroundImage = Properties.Resources.buttonWidget;
             }
         }
-        private void button_Minimize_Click(object sender, EventArgs e)
+        void button_Minimize_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             WindowState = FormWindowState.Minimized;
         }
-        private void button_Close_Click(object sender, EventArgs e)
+        void button_Close_Click(object sender, EventArgs e)
         {
             labelMain.Focus();
             Application.Exit();
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void labelMain_MouseDown(object sender, MouseEventArgs e)
+        void labelMain_MouseDown(object sender, MouseEventArgs e)
         {
             lastLocation = e.Location;
             labelMain.MouseMove += labelMain_MouseMove;
             labelMain.MouseLeave += labelMain_MouseLeave;
         }
-        private void labelMain_MouseUp(object sender, MouseEventArgs e)
+        void labelMain_MouseUp(object sender, MouseEventArgs e)
         {
             labelMain.MouseMove -= labelMain_MouseMove;
             labelMain.MouseLeave -= labelMain_MouseLeave;
         }
-        private void labelMain_MouseLeave(object sender, EventArgs e)
+        void labelMain_MouseLeave(object sender, EventArgs e)
         {
             labelMain.MouseMove -= labelMain_MouseMove;
             labelMain.MouseLeave -= labelMain_MouseLeave;
         }
-        private void labelMain_MouseMove(object sender, MouseEventArgs e)
+        void labelMain_MouseMove(object sender, MouseEventArgs e)
         {
             Location = new Point((Location.X - lastLocation.X) + e.X, (Location.Y - lastLocation.Y) + e.Y);
             if (windgetOpen)
@@ -721,14 +721,14 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void pressedButtonEvent(Button button, Bitmap bg, EventHandler nenter, EventHandler mleave)
+        void pressedButtonEvent(Button button, Bitmap bg, EventHandler nenter, EventHandler mleave)
         {
             button.Enabled = false;
             button.MouseEnter -= nenter;
             button.MouseLeave -= mleave;
             button.BackgroundImage = bg;
         }
-        private void raisedButtonEvent(Button button, Bitmap bg, EventHandler nenter, EventHandler mleave)
+        void raisedButtonEvent(Button button, Bitmap bg, EventHandler nenter, EventHandler mleave)
         {
             button.Enabled = true;
             button.MouseEnter += nenter;
@@ -880,75 +880,75 @@ namespace SkyrimSELauncher
             BackgroundImage = BMBackgroundImage;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_MouseEnter(object sender, EventArgs e)
+        void button_MouseEnter(object sender, EventArgs e)
         {
             (sender as Button).BackgroundImage = BMbuttonFullGlow;
         }
-        private void button_MouseLeave(object sender, EventArgs e)
+        void button_MouseLeave(object sender, EventArgs e)
         {
             (sender as Button).BackgroundImage = BMbuttonFull;
         }
-        private void button_Half_MouseEnter(object sender, EventArgs e)
+        void button_Half_MouseEnter(object sender, EventArgs e)
         {
 
         }
-        private void button_Half_MouseLeave(object sender, EventArgs e)
+        void button_Half_MouseLeave(object sender, EventArgs e)
         {
 
         }
-        private void button_Add_MouseEnter(object sender, EventArgs e)
+        void button_Add_MouseEnter(object sender, EventArgs e)
         {
             (sender as Button).BackgroundImage = BMbuttonOneGlow;
         }
-        private void button_Add_MouseLeave(object sender, EventArgs e)
+        void button_Add_MouseLeave(object sender, EventArgs e)
         {
             (sender as Button).BackgroundImage = BMbuttonOne;
         }
-        private void button_Skyrim_MouseEnter(object sender, EventArgs e)
+        void button_Skyrim_MouseEnter(object sender, EventArgs e)
         {
             button_Skyrim.BackgroundImage = BMbuttonlogoGlow;
         }
-        private void button_Skyrim_MouseLeave(object sender, EventArgs e)
+        void button_Skyrim_MouseLeave(object sender, EventArgs e)
         {
             button_Skyrim.BackgroundImage = BMbuttonlogo;
         }
-        private void button_ClearDirectory_MouseEnter(object sender, EventArgs e)
+        void button_ClearDirectory_MouseEnter(object sender, EventArgs e)
         {
             button_ClearDirectory.BackgroundImage = BMbuttonClearGlow;
         }
-        private void button_ClearDirectory_MouseLeave(object sender, EventArgs e)
+        void button_ClearDirectory_MouseLeave(object sender, EventArgs e)
         {
             button_ClearDirectory.BackgroundImage = BMbuttonClear;
         }
-        private void button_Help_MouseEnter(object sender, EventArgs e)
+        void button_Help_MouseEnter(object sender, EventArgs e)
         {
             button_Help.BackgroundImage = Properties.Resources.buttonHelpGlow;
         }
-        private void button_Help_MouseLeave(object sender, EventArgs e)
+        void button_Help_MouseLeave(object sender, EventArgs e)
         {
             button_Help.BackgroundImage = Properties.Resources.buttonHelp;
         }
-        private void button_Widget_MouseEnter(object sender, EventArgs e)
+        void button_Widget_MouseEnter(object sender, EventArgs e)
         {
             button_Widget.BackgroundImage = windgetOpen ? Properties.Resources.buttonWidgetPressed : Properties.Resources.buttonWidgetGlow;
         }
-        private void button_Widget_MouseLeave(object sender, EventArgs e)
+        void button_Widget_MouseLeave(object sender, EventArgs e)
         {
             button_Widget.BackgroundImage = windgetOpen ? Properties.Resources.buttonWidgetPressed : Properties.Resources.buttonWidget;
         }
-        private void button_Minimize_MouseEnter(object sender, EventArgs e)
+        void button_Minimize_MouseEnter(object sender, EventArgs e)
         {
             button_Minimize.BackgroundImage = Properties.Resources.buttonMinimizeGlow;
         }
-        private void button_Minimize_MouseLeave(object sender, EventArgs e)
+        void button_Minimize_MouseLeave(object sender, EventArgs e)
         {
             button_Minimize.BackgroundImage = Properties.Resources.buttonMinimize;
         }
-        private void button_Close_MouseEnter(object sender, EventArgs e)
+        void button_Close_MouseEnter(object sender, EventArgs e)
         {
             button_Close.BackgroundImage = Properties.Resources.buttonCloseGlow;
         }
-        private void button_Close_MouseLeave(object sender, EventArgs e)
+        void button_Close_MouseLeave(object sender, EventArgs e)
         {
             button_Close.BackgroundImage = Properties.Resources.buttonClose;
         }

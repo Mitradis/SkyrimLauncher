@@ -146,7 +146,7 @@ namespace SkyrimLauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        public static void unpackArhive(string path, bool noext, bool data)
+        public static void unpackArhive(string path, bool noext = false, bool data = false)
         {
             if (noext)
             {
@@ -169,7 +169,7 @@ namespace SkyrimLauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        public static void runProcess(string path, string arg, EventHandler onexit, bool java, bool shell, bool wait)
+        public static void runProcess(string path, string arg = null, EventHandler onexit = null, bool java = false, bool shell = false, bool wait = false)
         {
             if (File.Exists(path))
             {

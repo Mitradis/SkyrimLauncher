@@ -61,12 +61,12 @@ namespace SkyrimLauncher
             refreshAllValue();
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void imageBackgroundImage()
+        void imageBackgroundImage()
         {
             BackgroundImage = Properties.Resources.FormBackground;
             FuncMisc.textColor(this, true);
         }
-        private void langTranslateEN()
+        void langTranslateEN()
         {
             button_Install.Text = "Install";
             button_Uninstall.Text = "Uninstall";
@@ -91,7 +91,7 @@ namespace SkyrimLauncher
             textReservedMemory = "ReservedMemorySizeMb - buffer size between VRAM and RAM.";
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void refreshFileList()
+        void refreshFileList()
         {
             if (Directory.Exists(FormMain.pathENBFolder))
             {
@@ -110,7 +110,7 @@ namespace SkyrimLauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void refreshAllValue()
+        void refreshAllValue()
         {
             FuncSettings.checkENB();
             FuncSettings.physicsFPS();
@@ -141,7 +141,7 @@ namespace SkyrimLauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Install_Click(object sender, EventArgs e)
+        void button_Install_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex != -1)
             {
@@ -156,14 +156,14 @@ namespace SkyrimLauncher
                         FuncParser.iniWrite(FormMain.pathENBLocalINI, "PROXY", "InitProxyFunctions", "true");
                         FuncParser.iniWrite(FormMain.pathENBLocalINI, "PROXY", "ProxyLibrary", "d3d9_" + Path.GetFileNameWithoutExtension(file).Replace("Proxy DLL - ", "").ToLower() + ".dll");
                         FuncClear.removeENB(true);
-                        FuncFiles.unpackArhive(FormMain.pathENBFolder + file, false, false);
+                        FuncFiles.unpackArhive(FormMain.pathENBFolder + file);
                     }
                 }
                 else
                 {
                     FuncClear.removeENB(false);
                     FuncParser.iniWrite(FormMain.pathLauncherINI, "ENB", "LastPreset", file);
-                    FuncFiles.unpackArhive(FormMain.pathENBFolder + file, false, false);
+                    FuncFiles.unpackArhive(FormMain.pathENBFolder + file);
                 }
                 listBox1.Enabled = true;
                 FuncMisc.toggleButtons(this, true);
@@ -175,7 +175,7 @@ namespace SkyrimLauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Uninstall_Click(object sender, EventArgs e)
+        void button_Uninstall_Click(object sender, EventArgs e)
         {
             if (FuncMisc.dialogResult(textRemoveENB, FormMain.textConfirmTitle))
             {
@@ -185,62 +185,62 @@ namespace SkyrimLauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_DOF_Click(object sender, EventArgs e)
+        void button_DOF_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathENBSeriesINI, "EFFECT", "EnableDepthOfField", (!dof).ToString().ToLower());
             refreshDOF();
         }
-        private void refreshDOF()
+        void refreshDOF()
         {
             dof = FuncMisc.refreshButton(button_DOF, FormMain.pathENBSeriesINI, "EFFECT", "EnableDepthOfField");
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_AO_Click(object sender, EventArgs e)
+        void button_AO_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathENBSeriesINI, "EFFECT", "EnableAmbientOcclusion", (!ao).ToString().ToLower());
             refreshAO();
         }
-        private void refreshAO()
+        void refreshAO()
         {
             ao = FuncMisc.refreshButton(button_AO, FormMain.pathENBSeriesINI, "EFFECT", "EnableAmbientOcclusion");
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_SAA_Click(object sender, EventArgs e)
+        void button_SAA_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathENBLocalINI, "ANTIALIASING", "EnableSubPixelAA", (!saa).ToString().ToLower());
             refreshSAA();
         }
-        private void refreshSAA()
+        void refreshSAA()
         {
             saa = FuncMisc.refreshButton(button_SAA, FormMain.pathENBLocalINI, "ANTIALIASING", "EnableSubPixelAA");
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_TAA_Click(object sender, EventArgs e)
+        void button_TAA_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathENBLocalINI, "ANTIALIASING", "EnableTemporalAA", (!taa).ToString().ToLower());
             refreshTAA();
         }
-        private void refreshTAA()
+        void refreshTAA()
         {
             taa = FuncMisc.refreshButton(button_TAA, FormMain.pathENBLocalINI, "ANTIALIASING", "EnableTemporalAA");
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_EAA_Click(object sender, EventArgs e)
+        void button_EAA_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathENBLocalINI, "ANTIALIASING", "EnableEdgeAA", (!eaa).ToString().ToLower());
             refreshEAA();
         }
-        private void refreshEAA()
+        void refreshEAA()
         {
             eaa = FuncMisc.refreshButton(button_EAA, FormMain.pathENBLocalINI, "ANTIALIASING", "EnableEdgeAA");
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_AF_Click(object sender, EventArgs e)
+        void button_AF_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathENBLocalINI, "ENGINE", "ForceAnisotropicFiltering", (!af).ToString().ToLower());
             refreshAF();
         }
-        private void comboBox_AF_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_AF_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (af)
             {
@@ -248,7 +248,7 @@ namespace SkyrimLauncher
                 FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMaxAnisotropy", comboBox_AF.SelectedItem.ToString());
             }
         }
-        private void refreshAF()
+        void refreshAF()
         {
             af = FuncMisc.refreshButton(button_AF, FormMain.pathENBLocalINI, "ENGINE", "ForceAnisotropicFiltering");
             if (af)
@@ -262,12 +262,12 @@ namespace SkyrimLauncher
             comboBox_AF.Enabled = af;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_FPS_Click(object sender, EventArgs e)
+        void button_FPS_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathENBLocalINI, "LIMITER", "EnableFPSLimit", (!fps).ToString().ToLower());
             refreshFPS();
         }
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             if (fps)
             {
@@ -275,57 +275,57 @@ namespace SkyrimLauncher
                 FuncSettings.physicsFPS();
             }
         }
-        private void refreshFPS()
+        void refreshFPS()
         {
             fps = FuncMisc.refreshButton(button_FPS, FormMain.pathENBLocalINI, "LIMITER", "EnableFPSLimit");
             numericUpDown1.Value = FormMain.maxFPS;
             numericUpDown1.Enabled = fps;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void comboBox_ReservedMemory_SelectedIndexChanged(object sender, EventArgs e)
+        void comboBox_ReservedMemory_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (File.Exists(FormMain.pathENBLocalINI))
             {
                 FuncParser.iniWrite(FormMain.pathENBLocalINI, "MEMORY", "ReservedMemorySizeMb", comboBox_ReservedMemory.SelectedItem.ToString());
             }
         }
-        private void refreshReservedMemory()
+        void refreshReservedMemory()
         {
             comboBox_ReservedMemory.Enabled = File.Exists(FormMain.pathENBLocalINI);
             FuncMisc.refreshComboBox(comboBox_ReservedMemory, new double[] { 64, 128, 256, 384, 512, 640, 768, 896, 1024 }, FuncParser.intRead(FormMain.pathENBLocalINI, "MEMORY", "ReservedMemorySizeMb"), comboBox_ReservedMemory_SelectedIndexChanged);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_ExpandMemory_Click(object sender, EventArgs e)
+        void button_ExpandMemory_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathENBLocalINI, "MEMORY", "ExpandSystemMemoryX64", (!expandmemory).ToString().ToLower());
             refreshExpandMemory();
         }
-        private void refreshExpandMemory()
+        void refreshExpandMemory()
         {
             expandmemory = FuncMisc.refreshButton(button_ExpandMemory, FormMain.pathENBLocalINI, "MEMORY", "ExpandSystemMemoryX64");
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Compress_Click(object sender, EventArgs e)
+        void button_Compress_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathENBLocalINI, "MEMORY", "EnableCompression", (!compress).ToString().ToLower());
             refreshCompressMemory();
         }
-        private void refreshCompressMemory()
+        void refreshCompressMemory()
         {
             compress = FuncMisc.refreshButton(button_Compress, FormMain.pathENBLocalINI, "MEMORY", "EnableCompression");
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_AutoMemory_Click(object sender, EventArgs e)
+        void button_AutoMemory_Click(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathENBLocalINI, "MEMORY", "AutodetectVideoMemorySize", (!autovram).ToString().ToLower());
             refreshAutoDetect();
         }
-        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
             FuncParser.iniWrite(FormMain.pathENBLocalINI, "MEMORY", "VideoMemorySizeMb", numericUpDown2.Value.ToString());
             FormMain.memorySizeENB = numericUpDown2.Value;
         }
-        private void refreshAutoDetect()
+        void refreshAutoDetect()
         {
             autovram = FuncMisc.refreshButton(button_AutoMemory, FormMain.pathENBLocalINI, "MEMORY", "AutodetectVideoMemorySize");
             FuncParser.iniWrite(FormMain.pathENBLocalINI, "MEMORY", "VideoMemorySizeMb", FormMain.memorySizeENB.ToString());
@@ -333,11 +333,11 @@ namespace SkyrimLauncher
             numericUpDown2.Value = FormMain.memorySizeENB;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Close_MouseEnter(object sender, EventArgs e)
+        void button_Close_MouseEnter(object sender, EventArgs e)
         {
             button_Close.BackgroundImage = Properties.Resources.buttonCloseGlow;
         }
-        private void button_Close_MouseLeave(object sender, EventArgs e)
+        void button_Close_MouseLeave(object sender, EventArgs e)
         {
             button_Close.BackgroundImage = Properties.Resources.buttonClose;
         }

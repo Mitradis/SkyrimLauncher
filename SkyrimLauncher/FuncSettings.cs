@@ -185,10 +185,10 @@ namespace SkyrimLauncher
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
         public static void physicsFPS()
         {
-            FuncParser.iniWrite(FormMain.pathSkyrimINI, "HAVOK", "fMaxTime", ((1 / (FormMain.maxFPS >= 60 ? FormMain.maxFPS : 60)).ToString() + "000000").Replace(",", ".").Remove(6));
+            FuncParser.iniWrite(FormMain.pathSkyrimINI, "HAVOK", "fMaxTime", ((1 / (FormMain.maxFPS >= 60 ? FormMain.maxFPS : 60)) + "000000").Replace(",", ".").Remove(6));
             if (File.Exists(FormMain.pathENBLocalINI))
             {
-                FuncParser.iniWrite(FormMain.pathENBLocalINI, "LIMITER", "FPSLimit", FormMain.maxFPS.ToString() + ".0");
+                FuncParser.iniWrite(FormMain.pathENBLocalINI, "LIMITER", "FPSLimit", FormMain.maxFPS + ".0");
             }
         }
         public static void restoreENBAdapter()

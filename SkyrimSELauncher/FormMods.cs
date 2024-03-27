@@ -33,12 +33,12 @@ namespace SkyrimSELauncher
             refreshFileList();
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void imageBackgroundImage()
+        void imageBackgroundImage()
         {
             BackgroundImage = Properties.Resources.FormBackground;
             FuncMisc.textColor(this, true);
         }
-        private void langTranslateEN()
+        void langTranslateEN()
         {
             button_Install.Text = "Install";
             button_Uninstall.Text = "Uninstall";
@@ -48,7 +48,7 @@ namespace SkyrimSELauncher
             textNoUninstalFile = "No .txt instruction file.";
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void refreshFileList()
+        void refreshFileList()
         {
             if (Directory.Exists(FormMain.pathModsFolder))
             {
@@ -67,7 +67,7 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Install_Click(object sender, EventArgs e)
+        void button_Install_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count > 0)
             {
@@ -86,9 +86,9 @@ namespace SkyrimSELauncher
                             FuncMisc.resourceArchives(line, false);
                         }
                     }
-                    if (FuncParser.keyExists(file, "INSTALL", "ASPECTRATIO_" + FormMain.aspectRatio.ToString()))
+                    if (FuncParser.keyExists(file, "INSTALL", "ASPECTRATIO_" + FormMain.aspectRatio))
                     {
-                        FuncFiles.unpackArhive(FormMain.pathGameFolder + FuncParser.stringRead(file, "INSTALL", "ASPECTRATIO_" + FormMain.aspectRatio.ToString()), true, true);
+                        FuncFiles.unpackArhive(FormMain.pathGameFolder + FuncParser.stringRead(file, "INSTALL", "ASPECTRATIO_" + FormMain.aspectRatio), true, true);
                     }
                     foreach (string line in File.ReadLines(file))
                     {
@@ -115,7 +115,7 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Uninstall_Click(object sender, EventArgs e)
+        void button_Uninstall_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count > 0)
             {
@@ -163,11 +163,11 @@ namespace SkyrimSELauncher
             }
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        private void button_Close_MouseEnter(object sender, EventArgs e)
+        void button_Close_MouseEnter(object sender, EventArgs e)
         {
             button_Close.BackgroundImage = Properties.Resources.buttonCloseGlow;
         }
-        private void button_Close_MouseLeave(object sender, EventArgs e)
+        void button_Close_MouseLeave(object sender, EventArgs e)
         {
             button_Close.BackgroundImage = Properties.Resources.buttonClose;
         }
