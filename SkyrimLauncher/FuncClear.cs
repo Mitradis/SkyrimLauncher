@@ -119,6 +119,8 @@ namespace SkyrimLauncher
                 "data|landscape improved.esp",
                 "data|leveled enemy.bsa",
                 "data|leveled enemy.esp",
+                "data|mergedcloakseffects.bsa",
+                "data|mergedcloakseffects.esp",
                 "data|meshes|0sa",
                 "data|meshes|actors|character|animations|osa",
                 "data|meshes|actors|character|animations|osexattire",

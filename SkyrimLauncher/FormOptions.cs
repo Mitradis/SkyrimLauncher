@@ -20,7 +20,6 @@ namespace SkyrimLauncher
         string textGrassDensity = "iMinGrassSize - расстояние между кустами травы, меньше - плотнее.";
         string textMaxFPS = "fMaxTime - отвечает за поведение физики в игре при разном FPS.";
         string textNearDistance = "Меньше - сильнее мерцания. Больше - больше отсечения объектов вблизи.";
-        string perfomance = "Установка этого параметра в положение Ультра вызовет заикания игры при передвижении.";
         string textRedateMods = "Массовое изменение даты изменения файлов по возрастанию.";
         string textShadowResolution = "iShadowMapResolution - \"тяжелый\" параметр теней.";
         string textZFighting = "Уменьшает мерцание гор вдали.";
@@ -140,7 +139,6 @@ namespace SkyrimLauncher
             textGrassDensity = "iMinGrassSize - distance between the grass bushes, smaller - denser.";
             textNearDistance = "Less - stronger flickering of mountains. Larger - stronger clipping textures near objects.";
             textMaxFPS = "fMaxTime - responsible for the correct operation of the game with different FPS.";
-            perfomance = "Setting this to Ultra will cause the game to stutter when moving.";
             textRedateMods = "Mass change of the date of change of files in ascending order.";
             textShadowResolution = "iShadowMapResolution - \"heaviest\" shadow parameter.";
             textZFighting = "Reduces the flickering of mountains away.";
@@ -716,8 +714,7 @@ namespace SkyrimLauncher
             }
             else if (comboBox_LODObjectsTAB.SelectedIndex == 3)
             {
-                MessageBox.Show(perfomance);
-                setLODObjects("75000.0000", "250000.0000", "70000.0000", "35000.0000", "1.5000", "16896.0000", "600000.0000");
+                setLODObjects("40000.0000", "250000.0000", "70000.0000", "35000.0000", "1.5000", "16896.0000", "600000.0000");
             }
         }
         void setLODObjects(string fTreeLoadDistance, string fBlockMaximumDistance, string fBlockLevel1Distance, string fBlockLevel0Distance, string fSplitDistanceMult, string fTreesMidLODSwitchDist, string fSkyCellRefFadeDistance)
@@ -735,7 +732,7 @@ namespace SkyrimLauncher
         }
         void refreshLODObjects()
         {
-            FuncMisc.refreshComboBox(comboBox_LODObjectsTAB, new double[] { 12500, 25000, 40000, 75000 }, FuncParser.intRead(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fTreeLoadDistance"), comboBox_LODObjectsTAB_SelectedIndexChanged);
+            FuncMisc.refreshComboBox(comboBox_LODObjectsTAB, new double[] { 75000, 100000, 150000, 250000 }, FuncParser.intRead(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockMaximumDistance"), comboBox_LODObjectsTAB_SelectedIndexChanged);
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
         void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -912,7 +909,6 @@ namespace SkyrimLauncher
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
         void trackBar_GrassDensityTAB_Scroll(object sender, EventArgs e)
         {
-
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Grass", "iMinGrassSize", (trackBar_GrassDensityTAB.Value * 5).ToString());
             label26TAB.Text = (trackBar_GrassDensityTAB.Value * 5).ToString();
         }
@@ -923,7 +919,7 @@ namespace SkyrimLauncher
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
         void trackBar_GrassDistanceTAB_Scroll(object sender, EventArgs e)
         {
-            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Grass", "fGrassStartFadeDistance", (trackBar_GrassDistanceTAB.Value * 1000).ToString());
+            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Grass", "fGrassStartFadeDistance", (trackBar_GrassDistanceTAB.Value * 1000).ToString() + ".0000");
             label37TAB.Text = (trackBar_GrassDistanceTAB.Value * 1000).ToString();
         }
         void refreshGrassDistance()
@@ -933,7 +929,7 @@ namespace SkyrimLauncher
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
         void trackBar_ObjectsTAB_Scroll(object sender, EventArgs e)
         {
-            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "LOD", "fLODFadeOutMultObjects", (trackBar_ObjectsTAB.Value).ToString());
+            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "LOD", "fLODFadeOutMultObjects", (trackBar_ObjectsTAB.Value).ToString() + ".0000");
             label28TAB.Text = trackBar_ObjectsTAB.Value.ToString();
         }
         void refreshObjects()
@@ -943,7 +939,7 @@ namespace SkyrimLauncher
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
         void trackBar_ItemsTAB_Scroll(object sender, EventArgs e)
         {
-            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "LOD", "fLODFadeOutMultItems", (trackBar_ItemsTAB.Value).ToString());
+            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "LOD", "fLODFadeOutMultItems", (trackBar_ItemsTAB.Value).ToString() + ".0000");
             label35TAB.Text = trackBar_ItemsTAB.Value.ToString();
         }
         void refreshItems()
@@ -953,7 +949,7 @@ namespace SkyrimLauncher
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
         void trackBar_ActorsTAB_Scroll(object sender, EventArgs e)
         {
-            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "LOD", "fLODFadeOutMultActors", (trackBar_ActorsTAB.Value).ToString());
+            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "LOD", "fLODFadeOutMultActors", (trackBar_ActorsTAB.Value).ToString() + ".0000");
             label30TAB.Text = trackBar_ActorsTAB.Value.ToString();
         }
         void refreshActors()
@@ -963,7 +959,7 @@ namespace SkyrimLauncher
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
         void trackBar_LightsTAB_Scroll(object sender, EventArgs e)
         {
-            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fLightLODStartFade", (trackBar_LightsTAB.Value * 100).ToString());
+            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fLightLODStartFade", (trackBar_LightsTAB.Value * 100).ToString() + ".0000");
             label32TAB.Text = (trackBar_LightsTAB.Value * 100).ToString();
         }
         void refreshLights()
@@ -973,7 +969,7 @@ namespace SkyrimLauncher
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
         void trackBar_ShadowTAB_Scroll(object sender, EventArgs e)
         {
-            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fShadowDistance", (trackBar_ShadowTAB.Value * 500).ToString());
+            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fShadowDistance", (trackBar_ShadowTAB.Value * 500).ToString() + ".0000");
             label39TAB.Text = (trackBar_ShadowTAB.Value * 500).ToString();
         }
         void refreshShadowRange()

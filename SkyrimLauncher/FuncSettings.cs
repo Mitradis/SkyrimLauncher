@@ -48,7 +48,7 @@ namespace SkyrimLauncher
                 FuncParser.iniWrite(FormMain.pathSkyrimINI, "Decals", "uMaxSkinDecals", "0");
                 FuncParser.iniWrite(FormMain.pathSkyrimINI, "Display", "fDecalLifetime", "0.0000");
                 FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMaxSkinDecalsPerFrame", "0");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMaxDecalsPerFrame", "0");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMaxDecalsPerFrame", "350");
             }
             else if (value == 1)
             {
@@ -154,12 +154,12 @@ namespace SkyrimLauncher
                 FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fShadowDistance", "8000.0000");
 
                 FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fTreeLoadDistance", "40000.0000");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockMaximumDistance", "150000.0000");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockLevel1Distance", "40000.0000");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockLevel0Distance", "25000.0000");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fSplitDistanceMult", "1.1000");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fTreesMidLODSwitchDist", "5000.0000");
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "MAIN", "fSkyCellRefFadeDistance", "300000.0000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockMaximumDistance", "250000.0000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockLevel1Distance", "70000.0000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fBlockLevel0Distance", "35000.0000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "TerrainManager", "fSplitDistanceMult", "1.5000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "fTreesMidLODSwitchDist", "16896.0000");
+                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "MAIN", "fSkyCellRefFadeDistance", "600000.0000");
 
                 FuncParser.iniWrite(FormMain.pathSkyrimINI, "Water", "bReflectLODLand", "1");
                 FuncParser.iniWrite(FormMain.pathSkyrimINI, "Water", "bReflectLODObjects", "1");
@@ -176,7 +176,6 @@ namespace SkyrimLauncher
                 FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMaxSkinDecalsPerFrame", "75");
                 FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMaxDecalsPerFrame", "350");
             }
-            FuncParser.iniWrite(Path.Combine(FormMain.pathDataFolder + "SKSE", "Plugins", "hdtphysicsextensions.ini"), "Simulator", "numThreads", Environment.ProcessorCount.ToString());
             FuncParser.iniWrite(FormMain.pathSkyrimINI, "Display", "fNearDistance", "15.0000");
             FuncParser.iniWrite(FormMain.pathLauncherINI, "Game", "ZFighting", "false");
             FormMain.settingsPreset = value;
@@ -279,6 +278,11 @@ namespace SkyrimLauncher
                 "iAdapter=0",
                 "",
                 "[Audio]",
+                "uiInitialCacheSize=10485760",
+                "uiMaxAudioCacheSize=10485760",
+                "uMaxSizeForCachedSound=524288",
+                "uAudioThreadSleepTimeGameMode=5",
+                "uAudioThreadSleepTimeMenuMode=5",
                 "fMusicDuckingSeconds=6.0000",
                 "fMusicUnDuckingSeconds=8.0000",
                 "fMenuModeFadeOutTime=3.0000",
@@ -286,6 +290,9 @@ namespace SkyrimLauncher
                 "",
                 "[Actor]",
                 "fVisibleNavmeshMoveDist=12288.0000",
+                "",
+                "[BackgroundLoad]",
+                "iPostProcessMilliseconds=1",
                 "",
                 "[Grass]",
                 "bAllowCreateGrass=1",
@@ -300,6 +307,9 @@ namespace SkyrimLauncher
                 "fOverShoulderHorsePosX=35.0000",
                 "fActorFadeOutLimit=-100.0000",
                 "bDisableAutoVanityMode=1",
+                "",
+                "[Controls]",
+                "fInitialPowerAttackDelay=0.4000",
                 "",
                 "[GeneralWarnings]",
                 "SGeneralMasterMismatchWarning=Check the \"Warnings.txt\" file for more information.",
@@ -317,6 +327,9 @@ namespace SkyrimLauncher
                 "fMagnetismLookingMult=0.0000",
                 "",
                 "[Papyrus]",
+                "iMinMemoryPageSize=512",
+                "iMaxMemoryPageSize=2048",
+                "iMaxAllocatedMemoryBytes=83886080",
                 "fPostLoadUpdateTimeMS=500.0000",
                 "bEnableLogging=0",
                 "bEnableTrace=0",
@@ -339,10 +352,7 @@ namespace SkyrimLauncher
                 "uMaxSkinDecalPerActor=7",
                 "",
                 "[LOD]",
-                "fFadeInThreshold=0",
-                "fFadeInTime=0",
-                "fFadeOutThreshold=0",
-                "fFadeOutTime=0",
+                "fFadeInTime=0.3000",
                 "",
                 "[MapMenu]",
                 "fMapMoveKeyboardSpeed=0.0300",
@@ -354,17 +364,15 @@ namespace SkyrimLauncher
                 "fWorldMapDepthBlurScale=0.0000",
                 "fWorldMapMaximumDepthBlur=0.0000",
                 "fWorldMapNearDepthBlurScale=0.0000",
+                "fMapWorldHeightAdjustmentForce=0",
                 "fMapWorldMaxPitch=90.0000",
                 "fMapWorldMinPitch=0.0000",
-                "fMapWorldYawRange=400.0000",
-                "uLockedObjectMapLOD=16",
                 "",
                 "[Water]",
                 "bReflectLODObjects=1",
                 "bReflectLODLand=1",
                 "bReflectSky=1",
-                "bReflectLODTrees=1",
-                ""
+                "bReflectLODTrees=1"
             };
         }
         public static List<string> skyrimPrefsINI()
@@ -506,8 +514,7 @@ namespace SkyrimLauncher
                 "",
                 "[Decals]",
                 "; next 1 unused by the game",
-                "uMaxDecals=100",
-                ""
+                "uMaxDecals=100"
             };
         }
         public static List<string> pluginsTXT()
@@ -565,13 +572,13 @@ namespace SkyrimLauncher
                 "JaxonzMapMarkers.esp",
                 "WondersOfWeather.esp",
                 "AlwaysPickUpBooks.esp",
+                "MergedCloaksEffects.esp",
                 "Follower Commentary.esp",
                 "Customizable Camera.esp",
                 "StaticLoadingScreens.esp",
                 "RemoveFakeDirectLight.esp",
                 "Occlusion Of The Worlds.esp",
-                "Dual Sheath Redux Patch.esp",
-                ""
+                "Dual Sheath Redux Patch.esp"
             };
         }
     }

@@ -12,10 +12,8 @@ namespace SkyrimLauncher
         static int startIndex = -1;
         static int enbIndex = -1;
         static int lineIndex = -1;
-        static bool blockClearKE = false;
-        static bool blockClearSR = false;
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        public static bool keyExists(string file, string section, string key)
+        public static bool keyExists(string file, string section, string key, bool flush = true)
         {
             startIndex = -1;
             enbIndex = -1;
@@ -56,22 +54,17 @@ namespace SkyrimLauncher
                     }
                 }
             }
-            if (blockClearKE)
-            {
-                blockClearKE = false;
-            }
-            else
+            if (flush)
             {
                 cacheFile.Clear();
             }
             return findKey;
         }
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
-        public static string stringRead(string file, string section, string key)
+        public static string stringRead(string file, string section, string key, bool flush = true)
         {
             string outString = null;
-            blockClearKE = true;
-            if (keyExists(file, section, key))
+            if (keyExists(file, section, key, false))
             {
                 outString = cacheFile[lineIndex].Remove(0, (key + "=").Length);
                 if (String.IsNullOrEmpty(outString))
@@ -79,11 +72,7 @@ namespace SkyrimLauncher
                     outString = null;
                 }
             }
-            if (blockClearSR)
-            {
-                blockClearSR = false;
-            }
-            else
+            if (flush)
             {
                 cacheFile.Clear();
             }
@@ -93,8 +82,7 @@ namespace SkyrimLauncher
         public static void iniWrite(string file, string section, string key, string value)
         {
             bool readyToWrite = false;
-            blockClearSR = true;
-            string line = stringRead(file, section, key);
+            string line = stringRead(file, section, key, false);
             if (lineIndex != -1)
             {
                 if (String.IsNullOrEmpty(value))

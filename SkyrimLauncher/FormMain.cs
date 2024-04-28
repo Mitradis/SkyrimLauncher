@@ -29,7 +29,6 @@ namespace SkyrimLauncher
         public static string pathLauncherINI = pathSkyrimFolder + "SkyrimLauncher.ini";
         public static string pathENBLocalINI = pathGameFolder + "enblocal.ini";
         public static string pathENBSeriesINI = pathGameFolder + "enbseries.ini";
-        public static string argsStartsWith = null;
         public static string langTranslate = "RU";
         public static string customFont = null;
         public static string textAlreadyExists = null;
@@ -45,7 +44,7 @@ namespace SkyrimLauncher
         public static string textNotFound = null;
         public static string pathSeparator = pathGameFolder.Contains("/") ? "/" : "\\";
         public static decimal maxFPS = 60;
-        public static decimal memorySizeENB = 2048;
+        public static decimal memorySizeENB = 4096;
         public static int aspectRatio = -1;
         public static int gameDirLength = pathGameFolder.Length;
         public static int numberStyle = 1;
@@ -61,6 +60,8 @@ namespace SkyrimLauncher
         string pathAllApps = pathProgramsFolder + "AllPrograms.exe";
         string registryPath = @"SOFTWARE\Bethesda Softworks\Skyrim";
         string registryKey = "Installed Path";
+        string argsStartsWith = null;
+        string argsAffinityMask = null;
         string textClearDirectory = null;
         string textNoInIFound = null;
         string textNotInDirectory = null;
@@ -113,7 +114,11 @@ namespace SkyrimLauncher
             {
                 foreach (string line in arguments)
                 {
-                    if (line.StartsWith("-s=", StringComparison.OrdinalIgnoreCase))
+                    if (line.StartsWith("-a=", StringComparison.OrdinalIgnoreCase))
+                    {
+                        argsAffinityMask = line.Remove(0, 3);
+                    }
+                    else if (line.StartsWith("-s=", StringComparison.OrdinalIgnoreCase))
                     {
                         argsStartsWith = line.Remove(0, 3);
                     }
@@ -178,7 +183,7 @@ namespace SkyrimLauncher
                 memorySizeENB = FuncParser.intRead(pathLauncherINI, "ENB", "MemorySizeMb");
                 if (memorySizeENB < 0 || memorySizeENB > 32768)
                 {
-                    memorySizeENB = 2048;
+                    memorySizeENB = 4096;
                 }
                 if (!FuncParser.keyExists(pathLauncherINI, "Game", "ZFighting"))
                 {
@@ -283,61 +288,62 @@ namespace SkyrimLauncher
             if (!File.Exists(pathLauncherINI))
             {
                 FuncFiles.writeToFile(pathLauncherINI, new List<string>() {
-                "[General]",
-                "Version=" + panelFileVersion,
-                "AspectRatio=-1",
-                "FirstRun=true",
-                "HideWebButton=true",
-                "Language=RU",
-                "NumberStyle=1",
-                "SettingsPreset=2",
-                "WindowLeft=100",
-                "WindowTop=100",
-                "",
-                "[Game]",
-                "MaxFPS=60",
-                "ZFighting=false",
-                "NearDistance=18",
-                "",
-                "[ENB]",
-                "MemorySizeMb=2048",
-                "LastPreset=",
-                "",
-                "[Buttons]",
-                "; path from game directory",
-                "ButtonNameDSR=",
-                "PathDSR=",
-                "ButtonNameFNIS=",
-                "PathFNIS=",
-                "ButtonNameWB=",
-                "PathWB=",
-                "",
-                "[Font]",
-                "; common font, examples:",
-                ";    Comic Sans MS",
-                ";    Courier New",
-                ";    Franklin Gothic Medium",
-                ";    Georgia",
-                ";    Impact",
-                ";    Lucida Sans Unicode",
-                ";    Microsoft Sans Serif",
-                ";    Palatino Linotype",
-                ";    Tahoma",
-                ";    Times New Roman",
-                ";    Trebuchet MS",
-                "Font=",
-                "",
-                "[Updates]",
-                "; files extension index: .rar, .7z, .zip, .zipx",
-                "UpdatesExtension=1",
-                "UpdateHost=http://www.www.www/",
-                "",
-                "[Mods]",
-                "installedMods=",
-                "",
-                "[Clearing]",
-                "IgnoreList=",
-                "FoldersIgnored=" });
+                    "[General]",
+                    "Version=" + panelFileVersion,
+                    "AspectRatio=-1",
+                    "FirstRun=true",
+                    "HideWebButton=true",
+                    "Language=RU",
+                    "NumberStyle=1",
+                    "SettingsPreset=2",
+                    "WindowLeft=100",
+                    "WindowTop=100",
+                    "",
+                    "[Game]",
+                    "MaxFPS=60",
+                    "ZFighting=false",
+                    "NearDistance=18",
+                    "",
+                    "[ENB]",
+                    "MemorySizeMb=4096",
+                    "LastPreset=",
+                    "",
+                    "[Buttons]",
+                    "; path from game directory",
+                    "ButtonNameDSR=",
+                    "PathDSR=",
+                    "ButtonNameFNIS=",
+                    "PathFNIS=",
+                    "ButtonNameWB=",
+                    "PathWB=",
+                    "",
+                    "[Font]",
+                    "; common font, examples:",
+                    ";    Comic Sans MS",
+                    ";    Courier New",
+                    ";    Franklin Gothic Medium",
+                    ";    Georgia",
+                    ";    Impact",
+                    ";    Lucida Sans Unicode",
+                    ";    Microsoft Sans Serif",
+                    ";    Palatino Linotype",
+                    ";    Tahoma",
+                    ";    Times New Roman",
+                    ";    Trebuchet MS",
+                    "Font=",
+                    "",
+                    "[Updates]",
+                    "; files extension index: .rar, .7z, .zip, .zipx",
+                    "UpdatesExtension=1",
+                    "UpdateHost=http://www.www.www/",
+                    "",
+                    "[Mods]",
+                    "installedMods=",
+                    "",
+                    "[Clearing]",
+                    "IgnoreList=",
+                    "FoldersIgnored="
+                });
             }
             else
             {
@@ -722,7 +728,7 @@ namespace SkyrimLauncher
                 {
                     Thread.Sleep(argsWaitBefore * 1000);
                 }
-                FuncFiles.runProcess(pathGameFolder + "TESV.exe", "", closeSKSE);
+                FuncFiles.runProcess(pathGameFolder + "TESV.exe", argsAffinityMask != null ? "-affinity " + argsAffinityMask : "", closeSKSE);
             }
             else
             {
@@ -731,11 +737,19 @@ namespace SkyrimLauncher
         }
         void closeSKSE(object sender, EventArgs e)
         {
+            Thread.Sleep(250);
             Process[] processes = Process.GetProcessesByName("SKYRIM");
             if (processes.Length > 0)
             {
-                processes[0].EnableRaisingEvents = true;
-                processes[0].Exited += closeGAME;
+                try
+                {
+                    processes[0].EnableRaisingEvents = true;
+                    processes[0].Exited += closeGAME;
+                }
+                catch
+                {
+                    closeGAME(this, new EventArgs());
+                }
             }
             else
             {
