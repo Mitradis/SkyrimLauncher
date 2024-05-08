@@ -637,11 +637,7 @@ namespace SkyrimLauncher
         // ------------------------------------------------ BORDER OF FUNCTION ------------------------------------------------ //
         void comboBox_AFTAB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMaxAnisotropy", comboBox_AFTAB.SelectedItem.ToString());
-            if (File.Exists(FormMain.pathENBLocalINI))
-            {
-                FuncParser.iniWrite(FormMain.pathENBLocalINI, "ENGINE", "MaxAnisotropy", comboBox_AFTAB.SelectedItem.ToString());
-            }
+            FuncSettings.anisotropyFiltering(comboBox_AFTAB.SelectedItem.ToString());
         }
         void refreshAF()
         {

@@ -244,8 +244,7 @@ namespace SkyrimLauncher
         {
             if (af)
             {
-                FuncParser.iniWrite(FormMain.pathENBLocalINI, "ENGINE", "MaxAnisotropy", comboBox_AF.SelectedItem.ToString());
-                FuncParser.iniWrite(FormMain.pathSkyrimPrefsINI, "Display", "iMaxAnisotropy", comboBox_AF.SelectedItem.ToString());
+                FuncSettings.anisotropyFiltering(comboBox_AF.SelectedItem.ToString());
             }
         }
         void refreshAF()
